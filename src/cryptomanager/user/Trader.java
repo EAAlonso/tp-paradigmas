@@ -5,7 +5,7 @@ import java.util.Scanner;
 import cryptomanager.Constantes;
 import cryptomanager.csv.Readable;
 
-public class Trader extends Perfil {
+public class Trader extends Usuario {
 	private Long nroCuenta;
 	private String nombreBanco;
 	private String saldoActual;

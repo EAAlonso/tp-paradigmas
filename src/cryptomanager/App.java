@@ -9,7 +9,7 @@ import cryptomanager.csv.MercadoCSV;
 import cryptomanager.csv.Readable;
 import cryptomanager.csv.UsuarioCSV;
 import cryptomanager.user.Administrador;
-import cryptomanager.user.Perfil;
+import cryptomanager.user.Usuario;
 
 public class App {
 
@@ -26,7 +26,7 @@ public class App {
 		Readable fileCriptos = new CriptomonedaCSV("criptomonedas.csv");
 		Readable fileMercados = new MercadoCSV("mercados.csv");
 		
-		Perfil user = new Perfil();
+		Usuario user = new Usuario();
 		
 		user = Inicio.iniciarSesion(fileUsuarios);
 		

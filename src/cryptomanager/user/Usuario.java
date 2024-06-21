@@ -1,13 +1,13 @@
 package cryptomanager.user;
 
-public class Perfil {
+public class Usuario {
 	private String nombre;
 	
-	protected Perfil(String nombre) {
+	protected Usuario(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	public Perfil() {
+	public Usuario() {
 		
 	}
 	

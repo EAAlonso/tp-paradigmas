@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import cryptomanager.Constantes;
 import cryptomanager.user.Administrador;
-import cryptomanager.user.Perfil;
+import cryptomanager.user.Usuario;
 import cryptomanager.user.Trader;
 
 public class UsuarioCSV implements Readable {
@@ -27,7 +27,7 @@ public class UsuarioCSV implements Readable {
 				//System.out.println(values[0]); No me encuentra el primer registro...
 				if ((values[0].toLowerCase().trim().equals(nombreUsuario.toLowerCase().trim()))) {
 					
-					Perfil user;
+					Usuario user;
 					if (values[1].toLowerCase().trim().equals("administrador")) {
 						user = new Administrador(values[0].trim());
 					} else {

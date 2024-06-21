@@ -4,17 +4,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import cryptomanager.csv.Readable;
-import cryptomanager.user.Perfil;
+import cryptomanager.user.Usuario;
 import cryptomanager.user.Trader;
 
 public class Inicio {
-	public static Perfil iniciarSesion(Readable fileUsuarios) {
+	public static Usuario iniciarSesion(Readable fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
 		String userName;
 
-		Perfil user = new Perfil();
+		Usuario user = new Usuario();
 
 		while (!usuarioEncontrado) {
 			System.out.println("Ingrese nombre de usuario: ");

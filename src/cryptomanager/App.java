@@ -33,9 +33,8 @@ public class App {
 		Usuario user = new Usuario();
 
 		CSVManager lector = new CSVManager();
-		Inicio inicio = new Inicio();
 		
-		user = inicio.iniciarSesion(lector, fileUsuarios);
+		user = Inicio.iniciarSesion(lector, fileUsuarios);
 		
 		// System.out.println(((Trader) user).getNroCuenta());
 

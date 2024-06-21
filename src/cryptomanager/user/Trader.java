@@ -25,7 +25,7 @@ public class Trader extends Usuario {
 		String nombreBanco;
 		Double saldo;
 
-		System.out.println("Ingrese su nombre de usuario:");
+		System.out.println("Ingrese su nombre de usuario a registrar:");
 		nombre = userInput.nextLine();
 
 		System.out.println("Ingrese número de cuenta:");

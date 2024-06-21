@@ -9,7 +9,7 @@ import cryptomanager.user.Trader;
 import cryptomanager.user.Usuario;
 
 public class Inicio {
-	public Usuario iniciarSesion(CSVManager lector, Reader fileUsuarios) {
+	public static Usuario iniciarSesion(CSVManager lector, Reader fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class Inicio {
 		return user;
 	}
 
-	public void registrarse(CSVManager lector, Reader fileUsuarios) {
+	public static void registrarse(CSVManager lector, Reader fileUsuarios) {
 		boolean registro = false;
 		String registrarse;
 
@@ -59,7 +59,7 @@ public class Inicio {
 				System.out.println("Saliendo...");
 				System.exit(0);
 			} else {
-				System.out.println("No se reconoce la opción elegida. Por favor, elija entre Y o N.");
+				System.out.println("No se reconoce la opción elegida. Por favor, elija entre Y, N o E.");
 			}
 		}
 	}

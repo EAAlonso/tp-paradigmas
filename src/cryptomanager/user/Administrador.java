@@ -19,7 +19,7 @@ public class Administrador extends Usuario {
 		String nombre;
 		String simbolo;
 		Double valor;
-		
+
 		Scanner userInput = new Scanner(System.in);
 		while (!creada) {
 			try {
@@ -35,11 +35,27 @@ public class Administrador extends Usuario {
 
 				Criptomoneda criptomoneda = new Criptomoneda(nombre, simbolo, valor.toString());
 				if (lector.agregarRegistroCSV(fileCriptos, criptomoneda) == Constantes.CRIPTOMONEDA_EXISTENTE) {
+					String opcionRegistro;
+					boolean opcionElegida = false;
+					System.out.println("La criptomoneda ya existe. ¿Desea modificarla? Y/N");
+					while (!opcionElegida) {
+						opcionRegistro = userInput.nextLine();
+						if (opcionRegistro.equals("Y") || opcionRegistro.equals("y")) {
+							modificarCriptomoneda(lector, fileCriptos, fileMercado);
+							return Constantes.CRIPTOMONEDA_MODIFICADA;
+						} else if (opcionRegistro.equals("N") || opcionRegistro.equals("n")) {
+							opcionElegida = true;
+						} else {
+							System.out.println("No se reconoce la opción. Elija nuevamente entre Y/N.");
+						}
+					}
+
 					return Constantes.CRIPTOMONEDA_EXISTENTE;
+
 				} else {
 					Double valorVariacion = valor * 1.01;
 					Mercado mercado = new Mercado(simbolo, 500.0, 0.0, valorVariacion);
-					if(lector.agregarRegistroCSV(fileMercado, mercado) == Constantes.CRIPTOMONEDA_EN_MERCADO) {
+					if (lector.agregarRegistroCSV(fileMercado, mercado) == Constantes.CRIPTOMONEDA_EN_MERCADO) {
 						return Constantes.CRIPTOMONEDA_EN_MERCADO;
 					} else {
 						creada = true;
@@ -52,5 +68,9 @@ public class Administrador extends Usuario {
 		}
 
 		return Constantes.CRIPTOMONEDA_CREADA;
+	}
+
+	public int modificarCriptomoneda(CSVManager lector, Reader fileCriptos, Reader fileMercado) {
+		return Constantes.CRIPTOMONEDA_MODIFICADA;
 	}
 }

@@ -18,12 +18,10 @@ public class App {
 	public static void main(String[] args) {
 		boolean opcionMenuElegida = false;
 
-
 		Menu menu = new Menu(true);
 		int nroOpcion = 0;
 
 		Console console = System.console();
-
 
 		Scanner userInput = new Scanner(System.in);
 		Reader fileUsuarios = new UsuarioCSV("usuarios.csv");
@@ -61,7 +59,7 @@ public class App {
 					}
 					break;
 				case 2:
-					System.out.println("Mod cripto.");
+					System.out.println("Modificar Criptomoneda:");
 
 					break;
 				case 3:

@@ -10,4 +10,6 @@ public final class Constantes {
 	
 	public final static int CRIPTOMONEDA_EN_MERCADO = 2;
 	public final static int CRIPTOMONEDA_EN_MERCADO_CREADA = 1;
+	
+	public final static int CRIPTOMONEDA_MODIFICADA = 3;
 }

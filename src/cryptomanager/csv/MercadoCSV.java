@@ -53,9 +53,9 @@ public class MercadoCSV implements Readable {
 			String volumen = " " + mercado.getVolumen().toString().concat("% ");
 			
 	        DecimalFormat df = new DecimalFormat("#.##");
-	        Double porcentaje = mercado.getVariacion() * 0.01;
-	        String formatted = df.format(porcentaje);
-			String variacion = " +" + formatted.toString().concat("%");
+	        Double porcentaje = mercado.getVariacion() * Constantes.VARIACION_CRIPTOMONEDA_INICIAL;
+	        String formato = df.format(porcentaje);
+			String variacion = " +" + formato.toString().concat("%");
 			
 			String linea = String.format("%s,%s,%s,%s", mercado.getSimbolo(), " " + mercado.getCapacidad().toString().replace(".", ",").concat(" "),
 					volumen.replace(".", ","), variacion.replace(".", ","));

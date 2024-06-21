@@ -8,8 +8,8 @@ import java.io.IOException;
 
 import cryptomanager.Constantes;
 import cryptomanager.user.Administrador;
-import cryptomanager.user.Trader;
 import cryptomanager.user.Perfil;
+import cryptomanager.user.Trader;
 
 public class UsuarioCSV implements Readable {
 	private String filePath;
@@ -27,15 +27,16 @@ public class UsuarioCSV implements Readable {
 				//System.out.println(values[0]); No me encuentra el primer registro...
 				if ((values[0].toLowerCase().trim().equals(nombreUsuario.toLowerCase().trim()))) {
 					
+					Perfil user;
 					if (values[1].toLowerCase().trim().equals("administrador")) {
-						Administrador admin = new Administrador(values[0].trim());
-						return (T) admin;
+						user = new Administrador(values[0].trim());
 					} else {
 						Long nroCuenta = Long.parseLong(values[1].trim());
 						//Double saldo = Double.parseDouble(values[3].trim());
-						Trader trader = new Trader(values[0].trim(), nroCuenta, values[2].trim(), values[3].trim());
-						return (T) trader;
+						user = new Trader(values[0].trim(), nroCuenta, values[2].trim(), values[3].trim());
 					}
+					
+					return (T) user;
 				}
 			}
 		} catch (IOException e) {

@@ -44,8 +44,8 @@ public class CriptomonedaCSV implements Readable {
 			}	
 					
 		    try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
-		        String linea = String.format("%s,%s,%s", criptomoneda.getNombre() + " ",
-		        		" " + criptomoneda.getSimbolo() + " ", " " + criptomoneda.getValor().replace(',', '.'));
+		        String linea = String.format("%s,%s,%s", criptomoneda.getNombre(),
+		        		criptomoneda.getSimbolo(),criptomoneda.getValor().replace(',', '.'));
 		        bw.write(linea);
 		        bw.newLine();
 		    } catch (IOException e) {

@@ -11,7 +11,7 @@ import cryptomanager.user.Administrador;
 import cryptomanager.user.Trader;
 import cryptomanager.user.Perfil;
 
-public class UsuarioCSV implements Reader {
+public class UsuarioCSV implements Readable {
 	private String filePath;
 
 	public UsuarioCSV(String filePath) {

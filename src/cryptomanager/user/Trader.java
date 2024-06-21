@@ -3,7 +3,7 @@ package cryptomanager.user;
 import java.util.Scanner;
 
 import cryptomanager.Constantes;
-import cryptomanager.csv.Reader;
+import cryptomanager.csv.Readable;
 
 public class Trader extends Perfil {
 	private Long nroCuenta;
@@ -22,7 +22,7 @@ public class Trader extends Perfil {
 	 * @param fileUsuarios
 	 * @return
 	 */
-	public static int crearTraderEnArchivo(Reader fileUsuarios) {
+	public static int crearTraderEnArchivo(Readable fileUsuarios) {
 		Scanner userInput = new Scanner(System.in); // Scanner para ingresar datos por teclado
 		String nombre;
 		Long nroCuenta;

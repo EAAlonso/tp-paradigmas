@@ -11,7 +11,7 @@ import cryptomanager.Criptomoneda;
 import cryptomanager.user.Administrador;
 import cryptomanager.user.Trader;
 
-public class CriptomonedaCSV implements Reader {
+public class CriptomonedaCSV implements Readable {
 		private String filePath;
 		
 		public CriptomonedaCSV(String filePath) {

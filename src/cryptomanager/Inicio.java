@@ -3,12 +3,12 @@ package cryptomanager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cryptomanager.csv.Reader;
+import cryptomanager.csv.Readable;
 import cryptomanager.user.Perfil;
 import cryptomanager.user.Trader;
 
 public class Inicio {
-	public static Perfil iniciarSesion(Reader fileUsuarios) {
+	public static Perfil iniciarSesion(Readable fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
@@ -31,7 +31,7 @@ public class Inicio {
 		return user;
 	}
 
-	public static void registrarse(Reader fileUsuarios) {
+	public static void registrarse(Readable fileUsuarios) {
 		boolean registro = false;
 		String registrarse;
 

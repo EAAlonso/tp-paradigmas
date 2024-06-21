@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import cryptomanager.csv.CriptomonedaCSV;
 import cryptomanager.csv.MercadoCSV;
-import cryptomanager.csv.Reader;
+import cryptomanager.csv.Readable;
 import cryptomanager.csv.UsuarioCSV;
 import cryptomanager.user.Administrador;
 import cryptomanager.user.Perfil;
@@ -22,9 +22,9 @@ public class App {
 		Console console = System.console();
 
 		Scanner userInput = new Scanner(System.in);
-		Reader fileUsuarios = new UsuarioCSV("usuarios.csv");
-		Reader fileCriptos = new CriptomonedaCSV("criptomonedas.csv");
-		Reader fileMercados = new MercadoCSV("mercados.csv");
+		Readable fileUsuarios = new UsuarioCSV("usuarios.csv");
+		Readable fileCriptos = new CriptomonedaCSV("criptomonedas.csv");
+		Readable fileMercados = new MercadoCSV("mercados.csv");
 		
 		Perfil user = new Perfil();
 		

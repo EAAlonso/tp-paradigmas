@@ -11,7 +11,7 @@ import cryptomanager.Constantes;
 import cryptomanager.Criptomoneda;
 import cryptomanager.Mercado;
 
-public class MercadoCSV implements Reader {
+public class MercadoCSV implements Readable {
 	private String filePath;
 
 	public MercadoCSV(String filePath) {

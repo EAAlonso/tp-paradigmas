@@ -6,14 +6,14 @@ import java.util.Scanner;
 import cryptomanager.Constantes;
 import cryptomanager.Criptomoneda;
 import cryptomanager.Mercado;
-import cryptomanager.csv.Reader;
+import cryptomanager.csv.Readable;
 
 public class Administrador extends Perfil {
 	public Administrador(String nombre) {
 		super(nombre);
 	}
 
-	public int crearCriptomoneda(Reader fileCriptos, Reader fileMercado) {
+	public int crearCriptomoneda(Readable fileCriptos, Readable fileMercado) {
 		boolean creada = false;
 		String nombre;
 		String simbolo;
@@ -81,7 +81,7 @@ public class Administrador extends Perfil {
 		return Constantes.CRIPTOMONEDA_CREADA;
 	}
 
-	public int modificarCriptomoneda(Reader fileCriptos, Reader fileMercado) {
+	public int modificarCriptomoneda(Readable fileCriptos, Readable fileMercado) {
 		return Constantes.CRIPTOMONEDA_MODIFICADA;
 	}
 }

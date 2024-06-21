@@ -9,7 +9,7 @@ import java.io.IOException;
 import cryptomanager.Constantes;
 import cryptomanager.user.Administrador;
 import cryptomanager.user.Trader;
-import cryptomanager.user.Usuario;
+import cryptomanager.user.Perfil;
 
 public class UsuarioCSV implements Reader {
 	private String filePath;

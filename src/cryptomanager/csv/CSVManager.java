@@ -2,9 +2,10 @@ package cryptomanager.csv;
 
 import cryptomanager.user.Trader;
 
+// Adapter
 public class CSVManager {
-	public <T> T leerArchivoCSV(Reader archivo, String coincidencia) {
-		return archivo.leerArchivo(coincidencia);
+	public <T> T leerArchivoCSV(Reader archivo, String clave) {
+		return archivo.leerArchivo(clave);
 	}
 	
 	public <T> int agregarRegistroCSV(Reader archivo, T registro) {

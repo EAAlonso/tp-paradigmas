@@ -6,16 +6,16 @@ import java.util.Scanner;
 import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.Reader;
 import cryptomanager.user.Trader;
-import cryptomanager.user.Usuario;
+import cryptomanager.user.Perfil;
 
 public class Inicio {
-	public static Usuario iniciarSesion(CSVManager lector, Reader fileUsuarios) {
+	public static Perfil iniciarSesion(CSVManager lector, Reader fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
 		String userName;
 
-		Usuario user = new Usuario();
+		Perfil user = new Perfil();
 
 		while (!usuarioEncontrado) {
 			System.out.println("Ingrese nombre de usuario: ");

@@ -9,12 +9,12 @@ import cryptomanager.Mercado;
 import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.Reader;
 
-public class Administrador extends Usuario {
+public class Administrador extends Perfil {
 	public Administrador(String nombre) {
 		super(nombre);
 	}
 
-	public int crearCriptomoneda(CSVManager lector, Reader fileCriptos, Reader fileMercado) {
+	public int crearCriptomoneda(Reader fileCriptos, Reader fileMercado) {
 		boolean creada = false;
 		String nombre;
 		String simbolo;
@@ -34,31 +34,43 @@ public class Administrador extends Usuario {
 				userInput.nextLine();
 
 				Criptomoneda criptomoneda = new Criptomoneda(nombre, simbolo, valor.toString());
-				if (lector.agregarRegistroCSV(fileCriptos, criptomoneda) == Constantes.CRIPTOMONEDA_EXISTENTE) {
+				if (fileCriptos.agregarRegistro(criptomoneda) == Constantes.CRIPTOMONEDA_EXISTENTE) {
+					
 					String opcionRegistro;
 					boolean opcionElegida = false;
+					
 					System.out.println("La criptomoneda ya existe. ¿Desea modificarla? Y/N");
 					while (!opcionElegida) {
 						opcionRegistro = userInput.nextLine();
-						if (opcionRegistro.equals("Y") || opcionRegistro.equals("y")) {
-							modificarCriptomoneda(lector, fileCriptos, fileMercado);
+						
+						if (opcionRegistro.toLowerCase().equals("y")) {
+							
+							modificarCriptomoneda(fileCriptos, fileMercado);
 							return Constantes.CRIPTOMONEDA_MODIFICADA;
-						} else if (opcionRegistro.equals("N") || opcionRegistro.equals("n")) {
+						} 
+						else if (opcionRegistro.toLowerCase().equals("n")) {
 							opcionElegida = true;
-						} else {
-							System.out.println("No se reconoce la opción. Elija nuevamente entre Y/N.");
+						} 
+						else {
+							System.out.println("Opción inválida. Elija nuevamente entre Y/N.");
 						}
 					}
 
 					return Constantes.CRIPTOMONEDA_EXISTENTE;
 
 				} else {
-					Double valorVariacion = valor * 1.01;
-					Mercado mercado = new Mercado(simbolo, 500.0, 0.0, valorVariacion);
-					if (lector.agregarRegistroCSV(fileMercado, mercado) == Constantes.CRIPTOMONEDA_EN_MERCADO) {
-						return Constantes.CRIPTOMONEDA_EN_MERCADO;
+					
+					Double valorVariacion = valor * Constantes.VARIACION_CRIPTOMONEDA_INICIAL;
+					Mercado mercado = new Mercado(simbolo, Constantes.CAPACIDAD_CRIPTOMONEDA_INICIAL,
+							Constantes.VOLUMEN_CRIPTOMONEDA_INICIAL, valorVariacion);
+					
+					// Verificación de si la moneda está en el mercado.
+					if (fileMercado.agregarRegistro(mercado) 
+							== Constantes.CRIPTOMONEDA_EN_MERCADO) {
+						
+						return Constantes.CRIPTOMONEDA_EN_MERCADO; 
 					} else {
-						creada = true;
+						creada = true; // Fue creada con éxito.
 					}
 				}
 			} catch (InputMismatchException ex) {
@@ -70,7 +82,7 @@ public class Administrador extends Usuario {
 		return Constantes.CRIPTOMONEDA_CREADA;
 	}
 
-	public int modificarCriptomoneda(CSVManager lector, Reader fileCriptos, Reader fileMercado) {
+	public int modificarCriptomoneda(Reader fileCriptos, Reader fileMercado) {
 		return Constantes.CRIPTOMONEDA_MODIFICADA;
 	}
 }

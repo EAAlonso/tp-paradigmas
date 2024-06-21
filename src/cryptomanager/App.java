@@ -11,7 +11,7 @@ import cryptomanager.csv.Reader;
 import cryptomanager.csv.UsuarioCSV;
 import cryptomanager.user.Administrador;
 import cryptomanager.user.Trader;
-import cryptomanager.user.Usuario;
+import cryptomanager.user.Perfil;
 
 public class App {
 
@@ -28,7 +28,7 @@ public class App {
 		Reader fileCriptos = new CriptomonedaCSV("criptomonedas.csv");
 		Reader fileMercados = new MercadoCSV("mercados.csv");
 		
-		Usuario user = new Usuario();
+		Perfil user = new Perfil();
 
 		CSVManager lector = new CSVManager();
 		
@@ -54,7 +54,7 @@ public class App {
 				switch (nroOpcion) {
 				case 1:
 					System.out.println("Crear Criptomoneda:");
-					if(((Administrador) user).crearCriptomoneda(lector, fileCriptos, fileMercados) == Constantes.CRIPTOMONEDA_CREADA) {
+					if(((Administrador) user).crearCriptomoneda(fileCriptos, fileMercados) == Constantes.CRIPTOMONEDA_CREADA) {
 						System.out.println("La criptomoneda fue creada exitosamente.");
 					}
 					break;

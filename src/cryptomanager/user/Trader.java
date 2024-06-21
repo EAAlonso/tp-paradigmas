@@ -6,7 +6,7 @@ import cryptomanager.Constantes;
 import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.Reader;
 
-public class Trader extends Usuario {
+public class Trader extends Perfil {
 	private Long nroCuenta;
 	private String nombreBanco;
 	private String saldoActual;
@@ -17,14 +17,21 @@ public class Trader extends Usuario {
 		this.nombreBanco = nombreBanco;
 		this.saldoActual = saldoActual;
 	}
-	
+	/**
+	 * 
+	 * @param lector
+	 * @param fileUsuarios
+	 * @return
+	 */
 	public static int crearTraderEnArchivo(CSVManager lector, Reader fileUsuarios) {
-		Scanner userInput = new Scanner(System.in);
+		Scanner userInput = new Scanner(System.in); // Scanner para ingresar datos por teclado
 		String nombre;
 		Long nroCuenta;
 		String nombreBanco;
 		Double saldo;
 
+		// Agregar bloque try catch con excepcion InputMismatch
+		// Agregar dos metodos, uno que ingrese y otro que verifique ? 
 		System.out.println("Ingrese su nombre de usuario a registrar:");
 		nombre = userInput.nextLine();
 

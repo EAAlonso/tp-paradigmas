@@ -16,17 +16,14 @@ import cryptomanager.user.Usuario;
 public class App {
 
 	public static void main(String[] args) {
-		boolean usuarioEncontrado = false;
 		boolean opcionMenuElegida = false;
 
-		String registrarse;
 
 		Menu menu = new Menu(true);
 		int nroOpcion = 0;
 
 		Console console = System.console();
 
-		String userName;
 
 		Scanner userInput = new Scanner(System.in);
 		Reader fileUsuarios = new UsuarioCSV("usuarios.csv");
@@ -38,7 +35,7 @@ public class App {
 		CSVManager lector = new CSVManager();
 		Inicio inicio = new Inicio();
 		
-		inicio.iniciarSesion(lector, fileUsuarios);
+		user = inicio.iniciarSesion(lector, fileUsuarios);
 		
 		// System.out.println(((Trader) user).getNroCuenta());
 

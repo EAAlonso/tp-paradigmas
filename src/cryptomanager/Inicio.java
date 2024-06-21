@@ -9,14 +9,14 @@ import cryptomanager.user.Trader;
 import cryptomanager.user.Usuario;
 
 public class Inicio {
-	public void iniciarSesion(CSVManager lector, Reader fileUsuarios) {
+	public Usuario iniciarSesion(CSVManager lector, Reader fileUsuarios) {
 		boolean usuarioEncontrado = false;
-		
+
 		Scanner userInput = new Scanner(System.in);
 		String userName;
-		
+
 		Usuario user = new Usuario();
-		
+
 		while (!usuarioEncontrado) {
 			System.out.println("Ingrese nombre de usuario: ");
 			userName = userInput.nextLine();
@@ -28,14 +28,16 @@ public class Inicio {
 				usuarioEncontrado = true;
 			}
 		}
+
+		return user;
 	}
-	
+
 	public void registrarse(CSVManager lector, Reader fileUsuarios) {
 		boolean registro = false;
 		String registrarse;
-		
+
 		Scanner userInput = new Scanner(System.in);
-		
+
 		while (!registro) {
 			registrarse = userInput.nextLine();
 			if (registrarse.equals("Y") || registrarse.equals("y")) {

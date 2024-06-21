@@ -36,44 +36,10 @@ public class App {
 		Usuario user = new Usuario();
 
 		CSVManager lector = new CSVManager();
-		while (!usuarioEncontrado) {
-			System.out.println("Ingrese nombre de usuario: ");
-			userName = userInput.nextLine();
-
-			if ((user = lector.leerArchivoCSV(fileUsuarios, userName)) == null) {
-				boolean registro = false;
-				System.out.println("Usuario no encontrado. ¿Desea registrarse? Y/N/E");
-
-				while (!registro) {
-					registrarse = userInput.nextLine();
-					if (registrarse.equals("Y") || registrarse.equals("y")) {
-						try {
-							if ((Trader.crearTraderEnArchivo(lector, fileUsuarios)) == Constantes.USUARIO_EXISTENTE) {
-								System.out.println("Ya existe un usuario con ese nombre.");
-							} else {
-								System.out.println("Usuario registrado con exito.");
-							}
-						} catch (InputMismatchException ex) {
-							System.out.println("Datos erroneos. Presione Enter para continuar..");
-							userName = userInput.nextLine();
-						} finally {
-							registro = true;
-						}
-					} else if (registrarse.equals("N") || registrarse.equals("n")) {
-						registro = true;
-					} else if (registrarse.equals("E") || registrarse.equals("e")) {
-						System.out.println("Saliendo...");
-						System.exit(0);
-					} else {
-						System.out.println("No se reconoce la opción elegida. Por favor, elija entre Y o N.");
-					}
-
-				}
-			} else {
-				usuarioEncontrado = true;
-			}
-		}
-
+		Inicio inicio = new Inicio();
+		
+		inicio.iniciarSesion(lector, fileUsuarios);
+		
 		// System.out.println(((Trader) user).getNroCuenta());
 
 		if (user.getClass().getName().contains("Administrador")) {

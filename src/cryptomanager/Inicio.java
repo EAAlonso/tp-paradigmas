@@ -3,13 +3,12 @@ package cryptomanager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.Reader;
-import cryptomanager.user.Trader;
 import cryptomanager.user.Perfil;
+import cryptomanager.user.Trader;
 
 public class Inicio {
-	public static Perfil iniciarSesion(CSVManager lector, Reader fileUsuarios) {
+	public static Perfil iniciarSesion(Reader fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
@@ -21,9 +20,9 @@ public class Inicio {
 			System.out.println("Ingrese nombre de usuario: ");
 			userName = userInput.nextLine();
 
-			if ((user = lector.leerArchivoCSV(fileUsuarios, userName)) == null) {
+			if ((user = fileUsuarios.leerArchivo(userName)) == null) {
 				System.out.println("Usuario no encontrado. ¿Desea registrarse? Y/N/E");
-				registrarse(lector, fileUsuarios);
+				registrarse(fileUsuarios);
 			} else {
 				usuarioEncontrado = true;
 			}
@@ -32,7 +31,7 @@ public class Inicio {
 		return user;
 	}
 
-	public static void registrarse(CSVManager lector, Reader fileUsuarios) {
+	public static void registrarse(Reader fileUsuarios) {
 		boolean registro = false;
 		String registrarse;
 
@@ -42,7 +41,7 @@ public class Inicio {
 			registrarse = userInput.nextLine();
 			if (registrarse.equals("Y") || registrarse.equals("y")) {
 				try {
-					if ((Trader.crearTraderEnArchivo(lector, fileUsuarios)) == Constantes.USUARIO_EXISTENTE) {
+					if ((Trader.crearTraderEnArchivo(fileUsuarios)) == Constantes.USUARIO_EXISTENTE) {
 						System.out.println("Ya existe un usuario con ese nombre.");
 					} else {
 						System.out.println("Usuario registrado con exito.");

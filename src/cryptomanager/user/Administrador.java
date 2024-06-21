@@ -6,7 +6,6 @@ import java.util.Scanner;
 import cryptomanager.Constantes;
 import cryptomanager.Criptomoneda;
 import cryptomanager.Mercado;
-import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.Reader;
 
 public class Administrador extends Perfil {

@@ -4,13 +4,11 @@ import java.io.Console;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cryptomanager.csv.CSVManager;
 import cryptomanager.csv.CriptomonedaCSV;
 import cryptomanager.csv.MercadoCSV;
 import cryptomanager.csv.Reader;
 import cryptomanager.csv.UsuarioCSV;
 import cryptomanager.user.Administrador;
-import cryptomanager.user.Trader;
 import cryptomanager.user.Perfil;
 
 public class App {
@@ -29,10 +27,8 @@ public class App {
 		Reader fileMercados = new MercadoCSV("mercados.csv");
 		
 		Perfil user = new Perfil();
-
-		CSVManager lector = new CSVManager();
 		
-		user = Inicio.iniciarSesion(lector, fileUsuarios);
+		user = Inicio.iniciarSesion(fileUsuarios);
 		
 		// System.out.println(((Trader) user).getNroCuenta());
 

@@ -4,10 +4,6 @@ import java.io.Console;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cryptomanager.csv.CriptomonedaCSV;
-import cryptomanager.csv.MercadoCSV;
-import cryptomanager.csv.Readable;
-import cryptomanager.csv.UsuarioCSV;
 import cryptomanager.user.Administrador;
 import cryptomanager.user.Usuario;
 

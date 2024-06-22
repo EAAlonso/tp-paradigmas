@@ -1,10 +1,5 @@
 package cryptomanager;
 
-import java.io.Console;
-import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class App {
 
 	private static final String FILE_PATH_CRIPTOMONEDAS = "criptomonedas.csv";
@@ -30,6 +25,8 @@ public class App {
 		
 		Usuario usuarioSesion = inicio.iniciarSesion();
 		System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());
+		
+		usuarioSesion.mostrarMenu();
 		
 		// TODO: Cerrar System.in.close();
 		// TODO: New Usuario(csvCriptomoneda...);

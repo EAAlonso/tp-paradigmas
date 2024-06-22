@@ -22,4 +22,5 @@ public class Criptomoneda {
 	public String getSimbolo() {
 		return simbolo;
 	}
+	
 }

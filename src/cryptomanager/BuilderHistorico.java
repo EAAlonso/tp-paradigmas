@@ -16,4 +16,9 @@ public class BuilderHistorico implements BuilderFromStringArray<String,Historico
 		return params[0];
 	}
 
+	@Override
+	public String GetKey(Historico obj) {
+		return "";
+	}
+
 }

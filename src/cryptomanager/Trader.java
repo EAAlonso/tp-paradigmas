@@ -1,13 +1,11 @@
 package cryptomanager;
 
-import java.util.Scanner;
-
-import cryptomanager.Menu;
+import java.math.BigDecimal;
 
 public class Trader extends Usuario {
 	private Long nroCuenta;
 	private String nombreBanco;
-	private String saldoActual;
+	private BigDecimal saldoActual;
 	
     static {
         String titulo = "\nMENU TRADER\n\n";
@@ -23,7 +21,7 @@ public class Trader extends Usuario {
         menu = new Menu(titulo, opciones);
     }
 	
-	public Trader(String nombre, Long nroCuenta, String nombreBanco, String saldoActual) {
+	public Trader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoActual) {
 		super(nombre);
 		this.nroCuenta = nroCuenta;
 		this.nombreBanco = nombreBanco;
@@ -38,7 +36,7 @@ public class Trader extends Usuario {
 		return nombreBanco;
 	}
 	
-	public String getSaldoActual() {
+	public BigDecimal getSaldoActual() {
 		return saldoActual;
 	}
 	

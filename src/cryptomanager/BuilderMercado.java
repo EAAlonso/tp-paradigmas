@@ -12,4 +12,9 @@ public class BuilderMercado implements BuilderFromStringArray<String, Mercado> {
 		return params[0].trim();
 	}
 
+	@Override
+	public String GetKey(Mercado obj) {
+		return obj.getSimbolo();
+	}
+
 }

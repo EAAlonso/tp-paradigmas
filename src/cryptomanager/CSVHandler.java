@@ -47,5 +47,9 @@ public class CSVHandler<T,Q> {
 		return this.Data.get(key);
 	}
 	
+	public void insertarRegistro(Q value) {
+		this.Data.put(this.constructor.GetKey(value), value);
+	}
+	
 	// TODO private void close() { pisar CSV con el mapa}
 }

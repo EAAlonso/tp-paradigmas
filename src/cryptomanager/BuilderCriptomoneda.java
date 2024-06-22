@@ -16,4 +16,9 @@ public class BuilderCriptomoneda implements BuilderFromStringArray<String, Cript
 		return params[0].trim();
 	}
 
+	@Override
+	public String GetKey(Criptomoneda obj) {
+		return obj.getNombre();
+	}
+
 }

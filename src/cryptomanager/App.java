@@ -13,7 +13,7 @@ import cryptomanager.user.Usuario;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {/*
 		boolean opcionMenuElegida = false;
 
 		Menu menu = new Menu(true);
@@ -127,6 +127,6 @@ public class App {
 			}
 
 		}
-		userInput.close();
+		userInput.close();*/
 	}
 }

@@ -8,7 +8,7 @@ import cryptomanager.user.Usuario;
 import cryptomanager.user.Trader;
 
 public class Inicio {
-	public static Usuario iniciarSesion(Readable fileUsuarios) {
+	/*public static Usuario iniciarSesion(Readable fileUsuarios) {
 		boolean usuarioEncontrado = false;
 
 		Scanner userInput = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class Inicio {
 		}
 
 		return user;
-	}
+	}*/
 
 	public static void registrarse(Readable fileUsuarios) {
 		boolean registro = false;

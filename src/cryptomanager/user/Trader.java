@@ -3,12 +3,27 @@ package cryptomanager.user;
 import java.util.Scanner;
 
 import cryptomanager.Constantes;
+import cryptomanager.Menu;
 import cryptomanager.csv.Readable;
 
 public class Trader extends Usuario {
 	private Long nroCuenta;
 	private String nombreBanco;
 	private String saldoActual;
+	
+    static {
+        String titulo = "\nMENU TRADER\n\n";
+        String opciones =   "1) Comprar Criptomoneda\n"
+                            + "2) Vender Criptomoneda\n"
+                            + "3) Consultar Criptomoneda\n" 
+                            + "4) Recomendar Criptomonedas\n" 
+                            + "5) Consultar Estado actual del mercado\n"
+                            + "6) Visualizar archivo de transacciones (histórico)\n" 
+                            + "7) Salir\n" 
+                            + "\nIngresar opcion (1-7): ";
+        
+        menu = new Menu(titulo, opciones);
+    }
 	
 	public Trader(String nombre, Long nroCuenta, String nombreBanco, String saldoActual) {
 		super(nombre);
@@ -64,4 +79,9 @@ public class Trader extends Usuario {
 	public String getSaldoActual() {
 		return saldoActual;
 	}
+	
+    @Override
+    public void mostrarMenu() {
+        System.out.println(menu);
+    }
 }

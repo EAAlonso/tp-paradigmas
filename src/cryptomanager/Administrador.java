@@ -1,4 +1,4 @@
-package cryptomanager.user;
+package cryptomanager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

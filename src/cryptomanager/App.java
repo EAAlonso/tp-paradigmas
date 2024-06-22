@@ -4,9 +4,6 @@ import java.io.Console;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cryptomanager.user.Administrador;
-import cryptomanager.user.Usuario;
-
 public class App {
 
 	public static void main(String[] args) {/*

@@ -1,4 +1,4 @@
-package cryptomanager.user;
+package cryptomanager;
 
 import cryptomanager.Menu;
 

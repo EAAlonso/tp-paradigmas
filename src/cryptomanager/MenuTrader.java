@@ -25,7 +25,7 @@ public class MenuTrader extends Menu {
     public static final int OPCION_SALIR = 7;
     
     
-    Trader usuario;
+    private Trader usuario;
     
 	public MenuTrader(Trader usuario) {
 		super(titulo, opciones);

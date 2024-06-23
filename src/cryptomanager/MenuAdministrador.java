@@ -23,8 +23,10 @@ public class MenuAdministrador extends Menu {
     public static final int OPCION_CONSULTAR_ESTADO_MERCADO = 5;
     public static final int OPCION_SALIR = 6;
     
-	public MenuAdministrador() {		
+    private Administrador usuario;
+	public MenuAdministrador(Administrador usuario) {		
 		super(titulo, opciones);
+		this.usuario = usuario;
 	}
 
 	@Override

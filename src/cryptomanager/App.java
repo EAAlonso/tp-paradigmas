@@ -15,13 +15,13 @@ public class App {
 		BuilderMercado builderMercado = new BuilderMercado();
 		CSVHandler<String, Mercado> csvMercado = new CSVHandler<String, Mercado>(FILE_PATH_MERCADO, builderMercado);
 		
-		BuilderUsuario builderUsuario = new BuilderUsuario();
+		BuilderUsuario builderUsuario = new BuilderUsuario(csvCriptomoneda, csvMercado);
 		CSVHandler<String, Usuario> csvUsuario = new CSVHandler<String, Usuario>(FILE_PATH_USUARIO, builderUsuario);
 		
 		// BuilderHistorico builderHistorico = new BuilderHistorico();
 		// CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(FILE_PATH_HISTORICO, builderHistorico);
 		
-		Inicio inicio = new Inicio(csvUsuario);
+		Inicio inicio = new Inicio(csvUsuario, builderUsuario);
 		
 		Usuario usuarioSesion = inicio.iniciarSesion();
 		System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());

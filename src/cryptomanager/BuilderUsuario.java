@@ -5,13 +5,32 @@ import java.math.BigDecimal;
 public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
 	private static final String ROL_ADMINISTRADOR = "administrador";
 	
+	CSVHandler<String, Criptomoneda> criptomonedas;
+	CSVHandler<String, Mercado> mercado;
+	
+	public BuilderUsuario(CSVHandler<String, Criptomoneda> dataCriptomonedas, CSVHandler<String, Mercado> dataMercado) {
+		this.criptomonedas = dataCriptomonedas;
+		this.mercado = dataMercado;
+	}
+	
+	public Trader NewTrader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoCuenta) {
+		return new Trader(nombre, nroCuenta, nombreBanco, saldoCuenta, this.criptomonedas, this.mercado);
+	}
+	
 	@Override
 	public Usuario NewFromStringArray(String[] params) {
-		if (params[1].trim().equals(ROL_ADMINISTRADOR)) {
-			return new Administrador(params[0]);
+		String nombre = params[0].trim();
+		String rol = params[1].trim();
+		
+		if (rol.equals(ROL_ADMINISTRADOR)) {
+			return new Administrador(nombre, this.criptomonedas, this.mercado);
 		}
 		
-		return new Trader(params[0].trim(), Long.parseLong(params[1].trim()), params[2].trim(), new BigDecimal(params[3].trim()));
+		Long nroCuenta = Long.parseLong(params[1].trim());
+		String nombreBanco = params[2].trim();
+		BigDecimal saldoCuenta = new BigDecimal(params[3].trim());
+		
+		return new Trader(nombre, nroCuenta, nombreBanco, saldoCuenta, this.criptomonedas, this.mercado);
 	}
 
 	@Override

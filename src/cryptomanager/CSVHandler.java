@@ -47,8 +47,40 @@ public class CSVHandler<T,Q> {
 		return this.Data.get(key);
 	}
 	
+	public boolean existe(T key) {
+		return this.Data.containsKey(key);
+	}
+	
 	public void insertarRegistro(Q value) {
-		this.Data.put(this.constructor.GetKey(value), value);
+		T key = this.constructor.GetKey(value);
+		
+		if (this.Data.containsKey(key)) {
+			throw new RuntimeException("Metodo invalido, registro duplicado, se debe usar el metodo de actualizar");
+		}
+		
+		this.Data.put(key, value);
+	}
+	
+	public void actualizarRegistro(T oldKey, Q nuevoValue) {
+		if (!this.Data.containsKey(oldKey)) {
+			throw new RuntimeException("Metodo invalido, registro inexistente.");
+		}
+		
+		T nuevaKey = this.constructor.GetKey(nuevoValue);
+		this.Data.remove(oldKey);
+		this.Data.put(nuevaKey, nuevoValue);
+	}
+	
+	public void eliminarRegistro(T key) {
+		if (!this.Data.containsKey(key)) {
+			throw new RuntimeException("Metodo invalido, registro inexistente.");
+		}
+		
+		this.Data.remove(key);
+	}
+	
+	public Map<T,Q> getContenido() {
+		return this.Data;
 	}
 	
 	// TODO private void close() { pisar CSV con el mapa}

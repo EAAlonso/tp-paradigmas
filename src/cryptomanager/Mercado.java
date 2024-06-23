@@ -28,4 +28,15 @@ public class Mercado {
 	public Double getVariacion() {
 		return variacion;
 	}
+	
+	public void setSimbolo(String simbolo) {
+		this.simbolo = simbolo;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("[%s] Cap: %.2f - Vol: %.2f - Var: %.2f", simbolo, capacidad, volumen, variacion);
+	}
+	
+	
 }

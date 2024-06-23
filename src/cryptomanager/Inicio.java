@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class Inicio {
 	private CSVHandler<String,Usuario> usuarios;
+	private BuilderUsuario constructorUsuario;
 	
-	public Inicio(CSVHandler<String,Usuario> dataUsuarios) {
+	public Inicio(CSVHandler<String,Usuario> dataUsuarios, BuilderUsuario constructorUsuario) {
 		this.usuarios = dataUsuarios;
+		this.constructorUsuario = constructorUsuario;
 	}
 	
 	public Usuario iniciarSesion() {
@@ -85,7 +87,8 @@ public class Inicio {
 				BigDecimal saldoActual = userInput.nextBigDecimal();
 				userInput.nextLine();
 				
-				trader = new Trader(usuario, nroCuenta, nombreBanco, saldoActual);
+				trader = this.constructorUsuario.NewTrader(usuario, nroCuenta, nombreBanco, saldoActual);
+						
 				registrado = true;
 			} catch(Exception e) {
 				System.out.println("Dato incorrecto, vuelva a intentar. Presione enter para continuar...");

@@ -7,8 +7,14 @@ public class Trader extends Usuario {
 	private String nombreBanco;
 	private BigDecimal saldoActual;    
 	
-	public Trader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoActual) {
-		super(nombre);
+	public Trader(
+			String nombre,
+			Long nroCuenta,
+			String nombreBanco,
+			BigDecimal saldoActual,
+			CSVHandler<String, Criptomoneda> dataCriptomonedas,
+			CSVHandler<String, Mercado> dataMercado) {
+		super(nombre, dataCriptomonedas, dataMercado);
 		this.nroCuenta = nroCuenta;
 		this.nombreBanco = nombreBanco;
 		this.saldoActual = saldoActual;

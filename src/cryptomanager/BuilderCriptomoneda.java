@@ -1,5 +1,7 @@
 package cryptomanager;
 
+import java.math.BigDecimal;
+
 public class BuilderCriptomoneda implements BuilderFromStringArray<String, Criptomoneda> {
 
 	public BuilderCriptomoneda() {
@@ -8,7 +10,8 @@ public class BuilderCriptomoneda implements BuilderFromStringArray<String, Cript
 
 	@Override
 	public Criptomoneda NewFromStringArray(String[] params) {
-		return new Criptomoneda(params[0].trim(), params[1].trim(), params[2].trim());
+		
+		return new Criptomoneda(params[0].trim(), params[1].trim(), new BigDecimal(params[2].trim()));
 	}
 
 	@Override

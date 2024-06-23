@@ -3,9 +3,13 @@ package cryptomanager;
 public abstract class Usuario {
 	
 	private String nombre;
+	CSVHandler<String, Criptomoneda> criptomonedas;
+	CSVHandler<String, Mercado> mercado;
 	
-	protected Usuario(String nombre) {
+	protected Usuario(String nombre, CSVHandler<String, Criptomoneda> dataCriptomonedas, CSVHandler<String, Mercado> dataMercado) {
 		this.nombre = nombre;
+		this.criptomonedas = dataCriptomonedas;
+		this.mercado = dataMercado;
 	}
 	
 	public Usuario() {

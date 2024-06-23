@@ -38,15 +38,20 @@ public class MenuAdministrador extends Menu {
 			int opcion = this.pedirIngresoOpcion(mostrarOpcionInvalida);
 			
 			switch(opcion) {
-			case OPCION_CREAR_CRIPTOMONEDA: // TODO
+			case OPCION_CREAR_CRIPTOMONEDA:
+				this.usuario.crearCriptomoneda();
 				break;
-			case OPCION_MODIFICAR_CRIPTOMONEDA: // TODO 
+			case OPCION_MODIFICAR_CRIPTOMONEDA:
+				this.usuario.editarCriptomoneda();
 				break;
-			case OPCION_ELIMINAR_CRIPTOMONEDA: // TODO
+			case OPCION_ELIMINAR_CRIPTOMONEDA:
+				this.usuario.eliminarCriptomoneda();
 				break;
-			case OPCION_CONSULTAR_CRIPTOMONEDA: // TODO
+			case OPCION_CONSULTAR_CRIPTOMONEDA:
+				this.usuario.consultarCriptomoneda();
 				break;
-			case OPCION_CONSULTAR_ESTADO_MERCADO: // TODO
+			case OPCION_CONSULTAR_ESTADO_MERCADO:
+				this.usuario.consultarMercado();
 				break;
 			case OPCION_SALIR:
 				finPrograma = true;
@@ -56,7 +61,7 @@ public class MenuAdministrador extends Menu {
 					System.out.println("Opcion invalida.");
 			}
 			
-			mostrarOpcionInvalida = true;
+			mostrarOpcionInvalida = opcion < OPCION_MINIMO || opcion > OPCION_MAXIMO;
 		}
 	}
 }

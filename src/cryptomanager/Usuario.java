@@ -3,11 +3,9 @@ package cryptomanager;
 public abstract class Usuario {
 	
 	private String nombre;
-	protected Menu menu;
 	
-	protected Usuario(String nombre, Menu menu) {
+	protected Usuario(String nombre) {
 		this.nombre = nombre;
-		this.menu = menu;
 	}
 	
 	public Usuario() {
@@ -18,9 +16,7 @@ public abstract class Usuario {
 		return this.nombre;
 	}
 	
-	public void mostrarMenu() {
-		System.out.println(this.menu);
-	};
+	public abstract Menu newMenu();
 	
 	protected void consultarCriptomoneda() {
 		// implementación

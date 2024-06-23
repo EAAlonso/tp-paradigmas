@@ -5,16 +5,18 @@ import java.math.BigDecimal;
 public class Trader extends Usuario {
 	private Long nroCuenta;
 	private String nombreBanco;
-	private BigDecimal saldoActual;
-	
-    protected static Menu menu = new MenuTrader();
-    
+	private BigDecimal saldoActual;    
 	
 	public Trader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoActual) {
-		super(nombre, Trader.menu);
+		super(nombre);
 		this.nroCuenta = nroCuenta;
 		this.nombreBanco = nombreBanco;
 		this.saldoActual = saldoActual;
+	}
+	
+	@Override
+	public Menu newMenu() {
+		return new MenuTrader(this);
 	}
 	
 	public Long getNroCuenta() {

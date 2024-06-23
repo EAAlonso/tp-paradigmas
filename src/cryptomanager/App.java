@@ -26,7 +26,7 @@ public class App {
 		Usuario usuarioSesion = inicio.iniciarSesion();
 		System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());
 		
-		usuarioSesion.mostrarMenu();
+		usuarioSesion.newMenu().iniciar();
 		
 		// TODO: Cerrar System.in.close();
 		// TODO: New Usuario(csvCriptomoneda...);

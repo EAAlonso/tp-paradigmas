@@ -29,8 +29,8 @@ public abstract class Menu {
 	}
 
 	public static void limpiarConsola() {
-		for (int clear = 0; clear < 100; clear++) {
-			System.out.println("\b");
+		for (int clear = 0; clear < 10; clear++) {
+			System.out.println("\n");
 		}
 	}
 
@@ -62,11 +62,13 @@ public abstract class Menu {
 			try {
 				System.out.print(mensaje);
 				valor = userInput.next();
+				userInput.nextLine();
 				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
 				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
+				
 			}
 		}
 
@@ -81,11 +83,13 @@ public abstract class Menu {
 			try {
 				System.out.print(mensaje);
 				valor = userInput.nextBigDecimal();
+				userInput.nextLine(); // Limpieza de buffer
 				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
 				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
+				userInput.nextLine(); // Limpieza de buffer
 			}
 		}
 

@@ -42,6 +42,7 @@ public class MenuTrader extends Menu {
 			
 			switch(opcion) {
 			case OPCION_COMPRAR_CRIPTOMONEDA: // TODO
+				this.usuario.comprarCriptomonedas();
 				break;
 			case OPCION_VENDER_CRIPTOMONEDA: // TODO 
 				break;

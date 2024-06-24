@@ -24,7 +24,8 @@ public class App {
 		Inicio inicio = new Inicio(csvUsuario, builderUsuario);
 		
 		Usuario usuarioSesion = inicio.iniciarSesion();
-		System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());
+		System.out.println("\n+----- SESION INICIADA -----+\nUsuario: " + usuarioSesion.getNombre());
+		//System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());
 		
 		usuarioSesion.newMenu().iniciar();
 		

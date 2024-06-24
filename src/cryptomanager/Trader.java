@@ -68,6 +68,50 @@ public class Trader extends Usuario {
 		Menu.esperarTecla();
 	}
 	
+	public void venderCriptomonedas() {
+		Menu.limpiarConsola();
+		System.out.println("===== Venta de criptomonedas ===== ");
+		String nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
+
+		boolean criptoValida = false;
+		
+		Criptomoneda criptoBuscada = null;
+		Mercado criptoEnMercado = null;
+
+		while (!criptoValida) {
+
+			if (this.criptomonedas.existe(nombre)) {
+				criptoBuscada = this.criptomonedas.obtenerRegistro(nombre);
+				criptoEnMercado = this.mercado.obtenerRegistro(criptoBuscada.getSimbolo());
+				criptoValida = true;
+			} else {
+				nombre = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
+			}
+		}
+		
+		consultarHistoricoSinMenu();
+		
+		Menu.esperarTecla();
+	}
+	
+	private void consultarHistoricoSinMenu() {
+		if(!archivoTraderExistente()) {
+			System.out.println("No tienes ninguna criptomoneda.");
+		}
+		BuilderHistorico builderHistorico = new BuilderHistorico();
+		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(getNombre().concat(".csv"), builderHistorico);
+
+		for(String simboloCripto : csvHistorico.getContenido().keySet()) {
+			System.out.println(csvHistorico.obtenerRegistro(simboloCripto));
+		}
+		
+		/*
+		 		for(String simboloCripto : this.mercado.getContenido().keySet()) {
+			System.out.println(this.mercado.obtenerRegistro(simboloCripto));
+		}
+		 */
+	}
+	
 	private void crearRegistroEnHistorico(Criptomoneda criptoBuscada, BigDecimal monto) {
 		BuilderHistorico builderHistorico = new BuilderHistorico();
 		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(getNombre().concat(".csv"), builderHistorico);

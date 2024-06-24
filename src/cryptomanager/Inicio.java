@@ -2,6 +2,8 @@ package cryptomanager;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Inicio {
 	private CSVHandler<String,Usuario> usuarios;
@@ -58,7 +60,7 @@ public class Inicio {
 		return usuario;
 	}
 	
-	private String pedirNombreUsuario() {
+	private String pedirNombreUsuario() throws Exception {
 		Scanner userInput = new Scanner(System.in);
 		System.out.print("+ Ingrese nombre de usuario: ");
 		String userName = userInput.nextLine();

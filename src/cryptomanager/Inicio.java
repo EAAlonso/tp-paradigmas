@@ -12,29 +12,46 @@ public class Inicio {
 		this.constructorUsuario = constructorUsuario;
 	}
 	
+	private boolean strValido(String str) {
+		String regex = "^(?!\\d+$)[a-zA-Z0-9]+$";
+        
+	        // Crear un patron
+	        Pattern pattern = Pattern.compile(regex);
+	        
+	        // Comparar el string con el patron
+	        Matcher matcher = pattern.matcher(str);
+	        
+	        // True si coincide, false si no
+	        return matcher.matches() && !str.isBlank();
+	}
+	
 	public Usuario iniciarSesion() {
 		Usuario usuario = null;
 
 		while (usuario == null) {
-			String nombreUsuario = this.pedirNombreUsuario();
-			usuario = this.usuarios.obtenerRegistro(nombreUsuario);
-
-			if (usuario == null) {
-				String opcion = this.opcionesUsuarioNoEncontrado();
-				switch (opcion.toUpperCase()) {
-				case "Y": {
-					usuario = registrarse(nombreUsuario);
-					
-					break;
+			try {
+				String nombreUsuario = this.pedirNombreUsuario();
+				usuario = this.usuarios.obtenerRegistro(nombreUsuario);
+	
+				if (usuario == null) {
+					String opcion = this.opcionesUsuarioNoEncontrado();
+					switch (opcion.toUpperCase()) {
+					case "Y": {
+						usuario = registrarse(nombreUsuario);
+						
+						break;
+					}
+					case "E": {
+						System.out.println("+----- Cerrando... -----+");
+						System.exit(0);
+						
+						break;
+					}
+					default: // N - Reintenta
+					}
 				}
-				case "E": {
-					System.out.println("Cerrando...");
-					System.exit(0);
-					
-					break;
-				}
-				default: // N - Reintenta
-				}
+			} catch (Exception e){
+				System.out.println("##### Dato incorrecto, vuelva a intentar. Presione enter para continuar... #####\n");
 			}
 		}
 
@@ -43,8 +60,11 @@ public class Inicio {
 	
 	private String pedirNombreUsuario() {
 		Scanner userInput = new Scanner(System.in);
-		System.out.print("Ingrese nombre de usuario: ");
+		System.out.print("+ Ingrese nombre de usuario: ");
 		String userName = userInput.nextLine();
+		if(!strValido(userName))
+			throw new Exception();
+		
 		System.out.println();
 		
 		return userName;
@@ -52,7 +72,7 @@ public class Inicio {
 	
 	private String opcionesUsuarioNoEncontrado() {
 		Scanner userInput = new Scanner(System.in);
-		System.out.print("Usuario no encontrado. ¿Desea registrarse? Y(Si) / N(No - Reintentar) / E (Salir): ");
+		System.out.print("Usuario no encontrado. ¿Desea registrarse?\n+ Y - (Si)\n+ N - (No)\n+ E - (Salir)\nOpcion: ");
 		String opcion = userInput.nextLine();
 		System.out.println();
 		
@@ -74,29 +94,32 @@ public class Inicio {
 
 		while (!registrado) {
 			try {
-				System.out.print("Ingrese numero de cuenta:");
+				System.out.println("+----- REGISTRANDO USUARIO -----+");
+				
+				System.out.print("+ Ingrese numero de cuenta: ");
 				Long nroCuenta = userInput.nextLong();
 				userInput.nextLine();
+				if(nroCuenta < 0)
+					throw new Exception();
 				
-				System.out.println();
-				
-				System.out.print("Ingrese nombre de banco: ");
+				System.out.print("+ Ingrese nombre de banco: ");
 				String nombreBanco = userInput.nextLine();
-				
-				System.out.print("Ingrese saldo actual: ");
+				if(!strValido(nombreBanco))
+					throw new Exception();
+
+				System.out.print("+ Ingrese saldo actual: ");
 				BigDecimal saldoActual = userInput.nextBigDecimal();
 				userInput.nextLine();
-				
+				if(saldoActual.compareTo(BigDecimal.ZERO) < 0)
+					throw new Exception();
+
 				trader = this.constructorUsuario.NewTrader(usuario, nroCuenta, nombreBanco, saldoActual);
-						
 				registrado = true;
 			} catch(Exception e) {
-				System.out.println("Dato incorrecto, vuelva a intentar. Presione enter para continuar...");
+				System.out.println("##### Dato incorrecto, vuelva a intentar. Presione enter para continuar... #####\n");
 				userInput.nextLine();
 			}
 		}
-		
-		
 		
 		return trader;
 	}

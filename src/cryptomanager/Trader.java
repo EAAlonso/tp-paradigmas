@@ -121,11 +121,11 @@ public class Trader extends Usuario {
 	}
 	
 	private boolean archivoTraderExistente() {
-		return CSVHandler.archivoExistente(getNombre());
+		return CSVHandler.archivoCSVExistente(getNombre());
 	}
 	
 	private void crearArchivoTrader() {
-		CSVHandler.crearArchivo(getNombre());
+		CSVHandler.crearArchivoCSV(getNombre());
 	}
 	
 	private void efectuarCompra(BigDecimal monto, Criptomoneda criptoBuscada) {

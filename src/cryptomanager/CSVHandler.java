@@ -85,7 +85,7 @@ public class CSVHandler<T,Q> {
 		return this.Data;
 	}
 	
-	public static void crearArchivo(String fileName) {
+	public static void crearArchivoCSV(String fileName) {
 		try {
 			new FileWriter(fileName.concat(".csv"));
 		} catch(IOException e) {
@@ -93,7 +93,7 @@ public class CSVHandler<T,Q> {
 		}	
 	}
 	
-	public static boolean archivoExistente(String fileName) {
+	public static boolean archivoCSVExistente(String fileName) {
 		File archivo = new File(fileName.concat(".csv"));
 		return archivo.exists();		
 	}

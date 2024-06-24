@@ -1,7 +1,9 @@
 package cryptomanager;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +83,19 @@ public class CSVHandler<T,Q> {
 	
 	public Map<T,Q> getContenido() {
 		return this.Data;
+	}
+	
+	public static void crearArchivo(String fileName) {
+		try {
+			new FileWriter(fileName.concat(".csv"));
+		} catch(IOException e) {
+			System.err.println("Error al crear el archivo CSV: " + fileName);
+		}	
+	}
+	
+	public static boolean archivoExistente(String fileName) {
+		File archivo = new File(fileName.concat(".csv"));
+		return archivo.exists();		
 	}
 	
 	// TODO private void close() { pisar CSV con el mapa}

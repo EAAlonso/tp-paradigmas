@@ -8,7 +8,7 @@ public class BuilderHistorico implements BuilderFromStringArray<String,Historico
 
 	@Override
 	public Historico NewFromStringArray(String[] params) {
-		return new Historico();
+		return new Historico(params[0].trim(), Double.parseDouble(params[1].trim()));
 	}
 
 	@Override

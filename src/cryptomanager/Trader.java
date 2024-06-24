@@ -21,18 +21,87 @@ public class Trader extends Usuario {
 		String nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
 
 		boolean criptoValida = false;
+		
+		Criptomoneda criptoBuscada = null;
+		Mercado criptoEnMercado = null;
 
 		while (!criptoValida) {
 
 			if (this.criptomonedas.existe(nombre)) {
+				criptoBuscada = this.criptomonedas.obtenerRegistro(nombre);
+				criptoEnMercado = this.mercado.obtenerRegistro(criptoBuscada.getSimbolo());
 				criptoValida = true;
 			} else {
 				nombre = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
 			}
 		}
 		
-		BigDecimal monto = Menu.pedirBigDecimal("Ingrese cuanto desea comprar (Saldo actual: " + saldoActual + ")");
+		BigDecimal monto = Menu.pedirBigDecimal("Ingrese cuanto desea comprar (Saldo actual: " + saldoActual + "): ");
+		validarMontoSaldo(monto, criptoBuscada);
+		
+		if(criptoEnMercado == null) {
+			throw new RuntimeException("Error al buscar la criptomoneda en el mercado.");
+		}
+		
+		if(puedeComprarPorCapacidad(monto, criptoEnMercado)) {
+			// Logica de puede comprar porque hay en mercado
+					
+				// Crea el historico si no existe
+				if(!archivoTraderExistente()) {
+					crearArchivoTrader();
+				}
+				
+				crearRegistroEnHistorico(criptoBuscada, monto);
+				efectuarCompra(monto, criptoBuscada); // Reduce su saldo
 
+				mercado.actualizarRegistro(criptoEnMercado.getSimbolo(),
+						new Mercado(criptoEnMercado.getSimbolo(),
+								criptoEnMercado.getCapacidad() - monto.doubleValue(),
+								criptoEnMercado.getVolumen(),
+								criptoEnMercado.getVariacion()));
+			
+		} else {
+			// Logica no puede comprar porque no hay suficiente
+			System.out.println("No hay esa capacidad para comprar.");
+		}
+		
+		Menu.esperarTecla();
+	}
+	
+	private void crearRegistroEnHistorico(Criptomoneda criptoBuscada, BigDecimal monto) {
+		BuilderHistorico builderHistorico = new BuilderHistorico();
+		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(getNombre().concat(".csv"), builderHistorico);
+		
+		Historico historico = new Historico(criptoBuscada.getSimbolo(), monto.doubleValue());
+		csvHistorico.insertarRegistro(historico);
+	}
+	
+	private boolean archivoTraderExistente() {
+		return CSVHandler.archivoExistente(getNombre());
+	}
+	
+	private void crearArchivoTrader() {
+		CSVHandler.crearArchivo(getNombre());
+	}
+	
+	private void efectuarCompra(BigDecimal monto, Criptomoneda criptoBuscada) {
+		this.saldoActual = this.saldoActual.subtract(criptoBuscada.getValor().multiply(monto));
+	}
+	
+	private boolean puedeComprarPorCapacidad(BigDecimal monto, Mercado criptoEnMercado) {
+		return monto.doubleValue() < criptoEnMercado.getCapacidad();
+	}
+	
+	private void validarMontoSaldo(BigDecimal monto, Criptomoneda criptomoneda) {
+		boolean montoValido = false;
+		
+		while(!montoValido) {
+			if(monto.multiply(criptomoneda.getValor()).compareTo(saldoActual) < 0) {
+				return;
+			}
+			
+			monto = Menu.pedirBigDecimal("El monto que ingresaste supera tu saldo actual ( " + saldoActual + " ). Vuelva a ingresarlo: ");
+		}
 	}
 
 	@Override

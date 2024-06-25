@@ -24,7 +24,7 @@ public abstract class Menu {
 		}
 
 		this.listarOpciones();
-		int opcion = pedirInt("Ingrese un numero de opción y luego presione enter...: ");
+		int opcion = pedirInt("\n+ Ingrese un numero de opcion y luego presione enter: ");
 		return opcion;
 	}
 
@@ -47,7 +47,7 @@ public abstract class Menu {
 
 				caracterValido = true;
 			} catch (Exception e) {
-				System.out.println("*** Valor entero invalido! Vuelva a ingresar *** ");
+				System.out.println("##### Valor invalido. Intente nuevamente. #####");
 			}
 		}
 
@@ -67,8 +67,7 @@ public abstract class Menu {
 
 				caracterValido = true;
 			} catch (Exception e) {
-				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
-				
+				System.out.println("##### Valor invalido. Intente nuevamente. #####");
 			}
 		}
 
@@ -88,8 +87,7 @@ public abstract class Menu {
 
 				caracterValido = true;
 			} catch (Exception e) {
-				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
-				
+				System.out.println("##### Valor invalido. Intente nuevamente. #####");
 			}
 		}
 
@@ -109,7 +107,7 @@ public abstract class Menu {
 
 				caracterValido = true;
 			} catch (Exception e) {
-				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
+				System.out.println("##### Valor invalido. Intente nuevamente. #####");
 				userInput.nextLine(); // Limpieza de buffer
 			}
 		}
@@ -127,7 +125,7 @@ public abstract class Menu {
 			if (valor.toUpperCase().equals("Y")|| valor.toUpperCase().equals("N")) {
 				caracterValido = true;
 			} else {
-				System.out.println("Caracter invalido!");
+				System.out.println("##### Caracter invalido. #####");
 			}
 
 		}
@@ -144,15 +142,14 @@ public abstract class Menu {
 	}
 
 	private void mensajeOpcionInvalida() {
-		System.out.println("*** Opción invalida! Vuelva a ingresar una opción *** ");
+		System.out.println("##### Opcion invalida. Intente nuevamente. #####");
 	}
 
 	private void listarOpciones() {
-		System.out.println("---- " + this.titulo + " ----");
+		System.out.println("+----- " + this.titulo + " -----+");
 
 		for (int i = 0; i < this.opciones.length; i++) {
 			System.out.println((i + 1) + ") " + this.opciones[i]);
 		}
 	}
-
 }

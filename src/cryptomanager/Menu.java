@@ -74,6 +74,27 @@ public abstract class Menu {
 
 		return valor;
 	}
+	
+	public static double pedirDouble(String mensaje) {
+		double valor = 0;
+		boolean caracterValido = false;
+
+		while (!caracterValido) {
+			try {
+				System.out.print(mensaje);
+				valor = userInput.nextDouble();
+				userInput.nextLine();
+				System.out.println();
+
+				caracterValido = true;
+			} catch (Exception e) {
+				System.out.println("*** Valor invalido! Vuelva a ingresar *** ");
+				
+			}
+		}
+
+		return valor;
+	}
 
 	public static BigDecimal pedirBigDecimal(String mensaje) {
 		BigDecimal valor = null;

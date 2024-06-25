@@ -3,6 +3,9 @@ package cryptomanager;
 import java.math.BigDecimal;
 
 public class Trader extends Usuario {
+	private static final double FACTOR_VARIACION_VENTA = 0.93;
+	private static final double FACTOR_VOLUMEN_VENTA = 0.93;
+	
 	private Long nroCuenta;
 	private String nombreBanco;
 	private BigDecimal saldoActual;
@@ -72,7 +75,7 @@ public class Trader extends Usuario {
 	public void venderCriptomonedas() {
 		Menu.limpiarConsola();
 		System.out.println("===== Venta de criptomonedas ===== ");
-		String nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
+		String nombreCripto = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
 
 		boolean criptoValida = false;
 		
@@ -81,14 +84,45 @@ public class Trader extends Usuario {
 
 		while (!criptoValida) {
 
-			if (this.criptomonedas.existe(nombre)) {
-				criptoBuscada = this.criptomonedas.obtenerRegistro(nombre);
+			if (this.criptomonedas.existe(nombreCripto)) {
+				criptoBuscada = this.criptomonedas.obtenerRegistro(nombreCripto);
 				criptoEnMercado = this.mercado.obtenerRegistro(criptoBuscada.getSimbolo());
 				criptoValida = true;
 			} else {
-				nombre = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
+				nombreCripto = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
 			}
 		}
+		
+		//exhibir la cantidad maxima que podes vender (desde el historico)
+		Historico historico = dataHistorico.obtenerRegistro(criptoBuscada.getSimbolo());
+		System.out.println("Cantidad máxima para vender: " + historico.getCantidad());
+		
+		double montoAVender = Menu.pedirDouble("Ingrese la cantidad que desea vender: ");
+		
+		if(montoAVender > historico.getCantidad()) {
+			Menu.esperarTecla();
+			return;
+		} 
+		
+		//modificar el historico (si existe la cantidad que ingresas para vender)
+		String nombreSimbolo = criptoBuscada.getSimbolo();
+		Historico historicoActualizado = new Historico(nombreSimbolo, historico.getCantidad() - montoAVender);
+		dataHistorico.actualizarRegistro(nombreSimbolo, historicoActualizado);
+		
+		//modificar el mercado (sumando el valor, disminuir un 7% el volumen y variacion)
+		Mercado mercado = this.mercado.obtenerRegistro(nombreSimbolo);
+		
+		this.mercado.actualizarRegistro(nombreSimbolo, new Mercado(mercado.getSimbolo(),
+				mercado.getCapacidad() + montoAVender,
+				mercado.getVolumen() * FACTOR_VOLUMEN_VENTA,
+				mercado.getVariacion() * FACTOR_VARIACION_VENTA));
+		
+		//actualizar saldo usuario 
+		Criptomoneda criptomoneda = this.criptomonedas.obtenerRegistro(nombreCripto);
+		BigDecimal montoVendido = criptomoneda.getValor().multiply(BigDecimal.valueOf(montoAVender));
+		this.saldoActual = this.saldoActual.add(montoVendido);
+		
+		System.out.println("Vendiste " + montoAVender + " " + criptomoneda.getSimbolo() + " a $" + montoVendido);
 		
 		consultarHistoricoSinMenu();
 		
@@ -96,10 +130,6 @@ public class Trader extends Usuario {
 	}
 	
 	private void consultarHistoricoSinMenu() {
-		if(!archivoTraderExistente()) {
-			System.out.println("No tienes ninguna criptomoneda.");
-		}
-
 		for(String simboloCripto : dataHistorico.getContenido().keySet()) {
 			System.out.println(dataHistorico.obtenerRegistro(simboloCripto));
 		}
@@ -109,6 +139,10 @@ public class Trader extends Usuario {
 			System.out.println(this.mercado.obtenerRegistro(simboloCripto));
 		}
 		 */
+	}
+	
+	private void recomendarCriptomoneda() {
+		
 	}
 	
 	private void crearRegistroEnHistorico(Criptomoneda criptoBuscada, BigDecimal monto) {
@@ -123,14 +157,6 @@ public class Trader extends Usuario {
 		historico = new Historico(criptoBuscada.getSimbolo(), monto.doubleValue());
 		
 		dataHistorico.insertarRegistro(historico);
-	}
-	
-	private boolean archivoTraderExistente() {
-		return CSVHandler.archivoCSVExistente(getNombre());
-	}
-	
-	private void crearArchivoTrader() {
-		CSVHandler.crearArchivoCSV(getNombre());
 	}
 	
 	private void efectuarCompra(BigDecimal monto, Criptomoneda criptoBuscada) {

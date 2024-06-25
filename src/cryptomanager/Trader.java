@@ -1,8 +1,10 @@
 package cryptomanager;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Trader extends Usuario {
+	private static final int FACTOR_PORCENTAJE = 100;
 	private static final double FACTOR_VARIACION_VENTA = 0.93;
 	private static final double FACTOR_VOLUMEN_VENTA = 0.93;
 	
@@ -141,8 +143,51 @@ public class Trader extends Usuario {
 		 */
 	}
 	
-	private void recomendarCriptomoneda() {
+	public void recomendarCriptomoneda() {
+		try {
+			Menu.limpiarConsola();
+			System.out.println("===== Criptomoneda Recomendada ===== ");
+			Criptomoneda criptomoneda = obtenerMayorCriptomoneda();
+			System.out.println(criptomoneda.getNombre());
+			Menu.esperarTecla();
+		}
+		catch(Exception ex) {
+			System.err.println(ex.getMessage());
+		}		
+	}
+	
+	private Criptomoneda obtenerMayorCriptomoneda() {
+		Criptomoneda criptomonedaMayorValor = null;
+		double calculoEstadisticoMayor = 0;
+		for(Criptomoneda criptomoneda: this.criptomonedas.getContenido().values() ) {
+			double calculoEstadisticoActual = getCalculoEstadistico(criptomoneda.getSimbolo(), criptomoneda.getValor());
+			if(criptomonedaMayorValor == null || calculoEstadisticoMayor < calculoEstadisticoActual) {
+				criptomonedaMayorValor = criptomoneda;
+				calculoEstadisticoMayor = calculoEstadisticoActual;	
+			}		
+		}
 		
+		if(criptomonedaMayorValor == null) {
+			throw new RuntimeException("No hay criptomonedas registradas.");
+		}
+		
+		return criptomonedaMayorValor;
+	}
+	
+	private double getCalculoEstadistico(String simboloCriptomoneda, BigDecimal valor) {
+		Mercado mercadoMayor = this.mercado.obtenerRegistro(simboloCriptomoneda);
+		return BigDecimal.valueOf(mercadoMayor.getCapacidad()).divide(valor, 5, RoundingMode.HALF_UP).doubleValue() * FACTOR_PORCENTAJE;
+	}
+	
+	public void visualizarHistorico() {
+		Menu.limpiarConsola();
+		System.out.println(" ======== HISTORICO ========== ");
+		for(Historico historico : this.dataHistorico.getContenido().values()) {
+			System.out.println(historico);
+		}
+		
+		System.out.println("Presione una tecla para continuar...");
+		Menu.esperarTecla();
 	}
 	
 	private void crearRegistroEnHistorico(Criptomoneda criptoBuscada, BigDecimal monto) {

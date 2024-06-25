@@ -1,5 +1,7 @@
 package cryptomanager;
 
+import java.math.BigDecimal;
+
 public class Mercado {
 	private String simbolo;
 	private double capacidad;
@@ -37,6 +39,5 @@ public class Mercado {
 	public String toString() {
 		return String.format("[%s] Cap: %.2f - Vol: %.2f - Var: %.2f", simbolo, capacidad, volumen, variacion);
 	}
-	
 	
 }

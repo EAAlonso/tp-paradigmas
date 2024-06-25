@@ -85,6 +85,10 @@ public class CSVHandler<T,Q> {
 		return this.Data;
 	}
 	
+	public void guardarArchivo() {
+		
+	}
+	
 	public static void crearArchivoCSV(String fileName) {
 		try {
 			new FileWriter(fileName);

@@ -27,6 +27,8 @@ public class App {
 		
 		usuarioSesion.newMenu().iniciar();
 		
+		
+		
 		// TODO: Cerrar System.in.close();
 		// TODO: New Usuario(csvCriptomoneda...);
 		// TODO: csvCriptomoneda.close() al salir

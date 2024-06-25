@@ -14,7 +14,7 @@ public class Historico {
 	
 	@Override
 	public String toString() {
-		return String.format("%s, %.2f", simbolo, cantidad);
+		return String.format("[SIM: %s | CANT: %.2f]", simbolo, cantidad);
 	}
 	
 	public String getSimbolo() {

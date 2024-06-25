@@ -64,6 +64,7 @@ public class Inicio {
 	}
 	
 	private String pedirNombreUsuario() throws Exception {
+		
 		Scanner userInput = new Scanner(System.in);
 		System.out.print("+ Ingrese nombre de usuario: ");
 		String userName = userInput.nextLine();

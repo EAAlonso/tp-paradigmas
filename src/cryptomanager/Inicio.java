@@ -15,7 +15,7 @@ public class Inicio {
 	}
 	
 	private boolean strValido(String str) {
-		String regex = "^(?!\\d+$)[a-zA-Z0-9]+$";
+		String regex = "^(?!\\d+$)[a-zA-Z0-9 ]+$";
         
 	        // Crear un patron
 	        Pattern pattern = Pattern.compile(regex);
@@ -29,6 +29,8 @@ public class Inicio {
 	
 	public Usuario iniciarSesion() {
 		Usuario usuario = null;
+		
+		System.out.println("+----- INICIO SESION -----+");
 
 		while (usuario == null) {
 			try {

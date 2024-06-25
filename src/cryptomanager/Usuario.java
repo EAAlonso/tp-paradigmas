@@ -43,7 +43,7 @@ public abstract class Usuario {
 		String nombre = Menu.pedirString("+ Ingrese el nombre de la criptomoneda: ");
 
 		while (!this.criptomonedas.existe(nombre)) {
-			boolean reintentar = Menu.pedirYoN("+ Criptomoneda no encontrada. ¿Volver a intentar?\n- Y (Si)\n- N (No)\nIngrese opcion: ");
+			boolean reintentar = Menu.pedirYoN("\n+ Criptomoneda no encontrada. ¿Volver a intentar?\n+ Y - (Si)\n+ N - (No)\nIngrese opcion: ");
 			if (!reintentar) {
 				return null;
 			}

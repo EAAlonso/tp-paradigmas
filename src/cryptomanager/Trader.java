@@ -27,8 +27,8 @@ public class Trader extends Usuario {
 
 	public void comprarCriptomonedas() {
 		Menu.limpiarConsola();
-		System.out.println("===== Compra de criptomonedas ===== ");
-		String nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
+		System.out.println("+----- COMPRA DE CRIPTOMONEDAS -----+");
+		String nombre = Menu.pedirString("+ Ingrese el nombre de la criptomoneda: ");
 
 		boolean criptoValida = false;
 		
@@ -42,19 +42,19 @@ public class Trader extends Usuario {
 				criptoEnMercado = this.mercado.obtenerRegistro(criptoBuscada.getSimbolo());
 				criptoValida = true;
 			} else {
-				nombre = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
+				nombre = Menu.pedirString("+ La criptomoneda ingresada no existe. Vuelva a ingresar el nombre: ");				
 			}
 		}
 		
-		BigDecimal monto = Menu.pedirBigDecimal("Ingrese cuanto desea comprar (Saldo actual: " + saldoActual + "): ");
+		BigDecimal monto = Menu.pedirBigDecimal("+ Saldo actual: U$D " + saldoActual + "\n+ Ingrese cantidad a comprar: ");
 		if(!validarMontoSaldo(monto, criptoBuscada)) {
-			System.out.println("No tenes saldo. Presione una tecla para continuar..."); 
+			System.out.println("+ Saldo insuficiente. Presione una tecla para continuar..."); 
 			Menu.esperarTecla();
 			return;
 		}
 		
 		if(criptoEnMercado == null) {
-			throw new RuntimeException("Error al buscar la criptomoneda en el mercado.");
+			throw new RuntimeException("+ Error al buscar la criptomoneda en el mercado.");
 		}
 		
 		if(puedeComprarPorCapacidad(monto, criptoEnMercado)) {
@@ -72,16 +72,17 @@ public class Trader extends Usuario {
 			
 		} else {
 			// Logica no puede comprar porque no hay suficiente
-			System.out.println("No hay esa capacidad para comprar.");
+			System.out.println("+ Cantidad insuficiente para comprar.");
 		}
 		
+		System.out.println("\n+ Presione una tecla para continuar...");
 		Menu.esperarTecla();
 	}
 	
 	public void venderCriptomonedas() {
 		Menu.limpiarConsola();
-		System.out.println("===== Venta de criptomonedas ===== ");
-		String nombreCripto = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
+		System.out.println("+----- VENTA DE CRIPTOMONEDAS -----+");
+		String nombreCripto = Menu.pedirString("+ Ingrese el nombre de la criptomoneda: ");
 
 		boolean criptoValida = false;
 		
@@ -93,15 +94,15 @@ public class Trader extends Usuario {
 				criptoBuscada = this.criptomonedas.obtenerRegistro(nombreCripto);
 				criptoValida = true;
 			} else {
-				nombreCripto = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
+				nombreCripto = Menu.pedirString("+ La criptomoneda ingresada no existe. Vuelva a ingresar el nombre:");				
 			}
 		}
 		
 		//exhibir la cantidad maxima que podes vender (desde el historico)
 		Historico historico = dataHistorico.obtenerRegistro(criptoBuscada.getSimbolo());
-		System.out.println("Cantidad máxima para vender: " + historico.getCantidad());
+		System.out.println("+ Cantidad maxima para vender: " + historico.getCantidad());
 		
-		double montoAVender = Menu.pedirDouble("Ingrese la cantidad que desea vender: ");
+		double montoAVender = Menu.pedirDouble("+ Ingrese la cantidad que desea vender: ");
 		
 		if(montoAVender > historico.getCantidad()) {
 			Menu.esperarTecla();
@@ -126,10 +127,12 @@ public class Trader extends Usuario {
 		BigDecimal montoVendido = criptomoneda.getValor().multiply(BigDecimal.valueOf(montoAVender));
 		this.saldoActual = this.saldoActual.add(montoVendido);
 		
-		System.out.println("Vendiste " + montoAVender + " " + criptomoneda.getSimbolo() + " a $" + montoVendido);
+		System.out.println("+ Vendiste " + montoAVender + " [" + criptomoneda.getSimbolo() + "] a U$D" + montoVendido 
+							+ "\n\n+ Inventario de criptomonedas actual: ");
 		
 		consultarHistoricoSinMenu();
 		
+		System.out.println("\n+ Presione una tecla para continuar...");
 		Menu.esperarTecla();
 	}
 	
@@ -148,9 +151,13 @@ public class Trader extends Usuario {
 	public void recomendarCriptomoneda() {
 		try {
 			Menu.limpiarConsola();
-			System.out.println("===== Criptomoneda Recomendada ===== ");
+			System.out.println("+----- CRIPTOMONEDA RECOMENDADA -----+");
 			Criptomoneda criptomoneda = obtenerMayorCriptomoneda();
-			System.out.println(criptomoneda.getNombre());
+			System.out.println("+ La criptomoneda recomendada es: " + criptomoneda.getNombre() 
+																	+ "\n+ Simbolo: " + criptomoneda.getSimbolo()
+																	+ "\n+ Valor: " + criptomoneda.getValor());
+			
+			System.out.println("\n+ Presione una tecla para continuar...");
 			Menu.esperarTecla();
 		}
 		catch(Exception ex) {
@@ -170,7 +177,7 @@ public class Trader extends Usuario {
 		}
 		
 		if(criptomonedaMayorValor == null) {
-			throw new RuntimeException("No hay criptomonedas registradas.");
+			throw new RuntimeException("+ No hay criptomonedas registradas.");
 		}
 		
 		return criptomonedaMayorValor;
@@ -183,12 +190,12 @@ public class Trader extends Usuario {
 	
 	public void visualizarHistorico() {
 		Menu.limpiarConsola();
-		System.out.println(" ======== HISTORICO ========== ");
+		System.out.println("+----- HISTORICO -----+\n");
 		for(Historico historico : this.dataHistorico.getContenido().values()) {
 			System.out.println(historico);
 		}
 		
-		System.out.println("Presione una tecla para continuar...");
+		System.out.println("\n+ Presione una tecla para continuar...");
 		Menu.esperarTecla();
 	}
 	

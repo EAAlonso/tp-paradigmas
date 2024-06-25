@@ -47,9 +47,13 @@ public class MenuTrader extends Menu {
 			case OPCION_VENDER_CRIPTOMONEDA: // TODO 
 				this.usuario.venderCriptomonedas();
 				break;
+			case OPCION_CONSULTAR_CRIPTOMONEDAS:
+				this.usuario.consultarCriptomoneda();
+				break;
 			case OPCION_RECOMENDAR_CRIPTOMONEDA: // TODO
 				break;
 			case OPCION_CONSULTAR_MERCADO: // TODO
+				this.usuario.consultarMercado();
 				break;
 			case OPCION_VISUALIZAR_HISTORICO: // TODO
 				break;

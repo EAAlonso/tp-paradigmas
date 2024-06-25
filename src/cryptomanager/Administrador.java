@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Administrador extends Usuario {
 
-	private static final Double CAPACIDAD_DEFAULT_MERCADO = Double.valueOf(1);
+	private static final Double CAPACIDAD_DEFAULT_MERCADO = Double.valueOf(500);
 	private static final Double VOLUMEN_DEFAULT_MERCADO = Double.valueOf(1);
 	private static final Double VARIACION_DEFAULT_MERCADO = Double.valueOf(1);
 
@@ -60,47 +60,6 @@ public class Administrador extends Usuario {
 		if (confirma) {
 			this.eliminarCriptomonedaDesdeNombre(nombre);	
 		}
-	}
-	
-	public void consultarCriptomoneda() {
-		Menu.limpiarConsola();
-		System.out.println("===== Consulta de criptomoneda ===== ");
-		
-		String nombre = this.pedirNombreDeCriptomonedaExistente();
-		if (nombre == null) { // Cancela la operacion
-			return;
-		}
-		
-		System.out.println(this.criptomonedas.obtenerRegistro(nombre));
-		
-		System.out.println("Presione una tecla para continuar...");
-		Menu.esperarTecla();
-	}
-	
-	public void consultarMercado() {
-		Menu.limpiarConsola();
-		System.out.println(" ======== ESTADO DEL MERCADO ========== ");
-		for(String simboloCripto : this.mercado.getContenido().keySet()) {
-			System.out.println(this.mercado.obtenerRegistro(simboloCripto));
-		}
-		
-		System.out.println("Presione una tecla para continuar...");
-		Menu.esperarTecla();
-	}
-	
-	private String pedirNombreDeCriptomonedaExistente() {
-		String nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
-
-		while (!this.criptomonedas.existe(nombre)) {
-			boolean reintentar = Menu.pedirYoN("Criptomoneda no encontrada, ¿volver a intentar? Y (Si) / N (No): ");
-			if (!reintentar) {
-				return null;
-			}
-
-			nombre = Menu.pedirString("Ingrese el nombre de la criptomoneda: ");
-		}
-		
-		return nombre;
 	}
 
 	private void nuevaCriptomonedaDesdeNombre(String nombre) {

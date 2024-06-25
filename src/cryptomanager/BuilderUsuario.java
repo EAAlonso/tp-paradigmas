@@ -4,17 +4,29 @@ import java.math.BigDecimal;
 
 public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
 	private static final String ROL_ADMINISTRADOR = "administrador";
+	private static final String PATH_HISTORICO = "%s_historico.csv";
 	
 	CSVHandler<String, Criptomoneda> criptomonedas;
 	CSVHandler<String, Mercado> mercado;
 	
-	public BuilderUsuario(CSVHandler<String, Criptomoneda> dataCriptomonedas, CSVHandler<String, Mercado> dataMercado) {
+	BuilderHistorico builderHistorico; 
+	
+	public BuilderUsuario(CSVHandler<String, Criptomoneda> dataCriptomonedas,
+			CSVHandler<String, Mercado> dataMercado,
+			BuilderHistorico builderHistorico) {
 		this.criptomonedas = dataCriptomonedas;
 		this.mercado = dataMercado;
+		this.builderHistorico = builderHistorico;		
 	}
 	
 	public Trader NewTrader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoCuenta) {
-		return new Trader(nombre, nroCuenta, nombreBanco, saldoCuenta, this.criptomonedas, this.mercado);
+		if(!archivoTraderExistente(String.format(PATH_HISTORICO, nombre))) {
+			crearArchivoTrader(String.format(PATH_HISTORICO, nombre));
+		}
+		
+		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(String.format(PATH_HISTORICO, nombre), this.builderHistorico);
+		
+		return new Trader(nombre, nroCuenta, nombreBanco, saldoCuenta, this.criptomonedas, this.mercado, csvHistorico);
 	}
 	
 	@Override
@@ -29,8 +41,8 @@ public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
 		Long nroCuenta = Long.parseLong(params[1].trim());
 		String nombreBanco = params[2].trim();
 		BigDecimal saldoCuenta = new BigDecimal(params[3].trim());
-		
-		return new Trader(nombre, nroCuenta, nombreBanco, saldoCuenta, this.criptomonedas, this.mercado);
+
+		return NewTrader(nombre, nroCuenta, nombreBanco, saldoCuenta);
 	}
 
 	@Override
@@ -41,6 +53,14 @@ public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
 	@Override
 	public String GetKey(Usuario obj) {
 		return obj.getNombre();
+	}
+	
+	private boolean archivoTraderExistente(String nombre) {
+		return CSVHandler.archivoCSVExistente(nombre);
+	}
+	
+	private void crearArchivoTrader(String nombre) {
+		CSVHandler.crearArchivoCSV(nombre);
 	}
 
 }

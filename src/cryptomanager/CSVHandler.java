@@ -87,14 +87,14 @@ public class CSVHandler<T,Q> {
 	
 	public static void crearArchivoCSV(String fileName) {
 		try {
-			new FileWriter(fileName.concat(".csv"));
+			new FileWriter(fileName);
 		} catch(IOException e) {
 			System.err.println("Error al crear el archivo CSV: " + fileName);
 		}	
 	}
 	
 	public static boolean archivoCSVExistente(String fileName) {
-		File archivo = new File(fileName.concat(".csv"));
+		File archivo = new File(fileName);
 		return archivo.exists();		
 	}
 	

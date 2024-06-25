@@ -14,7 +14,15 @@ public class Historico {
 	
 	@Override
 	public String toString() {
-		return String.format("%s , %d", simbolo, cantidad);
+		return String.format("%s, %.2f", simbolo, cantidad);
+	}
+	
+	public String getSimbolo() {
+		return this.simbolo;
+	}
+	
+	public double getCantidad() {
+		return this.cantidad;
 	}
 
 }

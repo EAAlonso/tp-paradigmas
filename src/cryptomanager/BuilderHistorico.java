@@ -18,7 +18,7 @@ public class BuilderHistorico implements BuilderFromStringArray<String,Historico
 
 	@Override
 	public String GetKey(Historico obj) {
-		return "";
+		return obj.getSimbolo();
 	}
 
 }

@@ -14,7 +14,9 @@ public class App {
 		BuilderMercado builderMercado = new BuilderMercado();
 		CSVHandler<String, Mercado> csvMercado = new CSVHandler<String, Mercado>(FILE_PATH_MERCADO, builderMercado);
 		
-		BuilderUsuario builderUsuario = new BuilderUsuario(csvCriptomoneda, csvMercado);
+		BuilderHistorico builderHistorico = new BuilderHistorico();
+		
+		BuilderUsuario builderUsuario = new BuilderUsuario(csvCriptomoneda, csvMercado, builderHistorico);
 		CSVHandler<String, Usuario> csvUsuario = new CSVHandler<String, Usuario>(FILE_PATH_USUARIO, builderUsuario);
 		
 		Inicio inicio = new Inicio(csvUsuario, builderUsuario);

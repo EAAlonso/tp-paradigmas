@@ -6,13 +6,18 @@ public class Trader extends Usuario {
 	private Long nroCuenta;
 	private String nombreBanco;
 	private BigDecimal saldoActual;
+	
+	CSVHandler<String, Historico> dataHistorico;
 
 	public Trader(String nombre, Long nroCuenta, String nombreBanco, BigDecimal saldoActual,
-			CSVHandler<String, Criptomoneda> dataCriptomonedas, CSVHandler<String, Mercado> dataMercado) {
+			CSVHandler<String, Criptomoneda> dataCriptomonedas, CSVHandler<String, Mercado> dataMercado,
+			CSVHandler<String, Historico> dataHistorico) {
 		super(nombre, dataCriptomonedas, dataMercado);
 		this.nroCuenta = nroCuenta;
 		this.nombreBanco = nombreBanco;
 		this.saldoActual = saldoActual;
+		
+		this.dataHistorico = dataHistorico;
 	}
 
 	public void comprarCriptomonedas() {
@@ -47,10 +52,6 @@ public class Trader extends Usuario {
 			// Logica de puede comprar porque hay en mercado
 					
 				// Crea el historico si no existe
-				if(!archivoTraderExistente()) {
-					crearArchivoTrader();
-				}
-				
 				crearRegistroEnHistorico(criptoBuscada, monto);
 				efectuarCompra(monto, criptoBuscada); // Reduce su saldo
 
@@ -98,11 +99,9 @@ public class Trader extends Usuario {
 		if(!archivoTraderExistente()) {
 			System.out.println("No tienes ninguna criptomoneda.");
 		}
-		BuilderHistorico builderHistorico = new BuilderHistorico();
-		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(getNombre().concat(".csv"), builderHistorico);
 
-		for(String simboloCripto : csvHistorico.getContenido().keySet()) {
-			System.out.println(csvHistorico.obtenerRegistro(simboloCripto));
+		for(String simboloCripto : dataHistorico.getContenido().keySet()) {
+			System.out.println(dataHistorico.obtenerRegistro(simboloCripto));
 		}
 		
 		/*
@@ -113,11 +112,17 @@ public class Trader extends Usuario {
 	}
 	
 	private void crearRegistroEnHistorico(Criptomoneda criptoBuscada, BigDecimal monto) {
-		BuilderHistorico builderHistorico = new BuilderHistorico();
-		CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(getNombre().concat(".csv"), builderHistorico);
+		Historico historico = null;
 		
-		Historico historico = new Historico(criptoBuscada.getSimbolo(), monto.doubleValue());
-		csvHistorico.insertarRegistro(historico);
+		if(dataHistorico.existe(criptoBuscada.getSimbolo())) {
+			historico = dataHistorico.obtenerRegistro(criptoBuscada.getSimbolo());
+			dataHistorico.actualizarRegistro(criptoBuscada.getSimbolo(), new Historico(criptoBuscada.getSimbolo(), monto.doubleValue() + historico.getCantidad()));
+			return;
+		}
+		
+		historico = new Historico(criptoBuscada.getSimbolo(), monto.doubleValue());
+		
+		dataHistorico.insertarRegistro(historico);
 	}
 	
 	private boolean archivoTraderExistente() {

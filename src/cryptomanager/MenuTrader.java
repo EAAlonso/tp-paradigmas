@@ -61,6 +61,8 @@ public class MenuTrader extends Menu {
 				break;
 			case OPCION_SALIR:
 				finPrograma = true;
+				System.out.println("\n+----- Cerrando... -----+");
+				
 				break;
 				default:
 			}

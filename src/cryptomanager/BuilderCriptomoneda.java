@@ -7,7 +7,7 @@ public class BuilderCriptomoneda implements BuilderCSVObject<String, Criptomoned
 	private static final String CSV_HEADER = "Nombre,simbolo,valor\n";
 
 	public BuilderCriptomoneda() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -35,5 +35,4 @@ public class BuilderCriptomoneda implements BuilderCSVObject<String, Criptomoned
 	public String GetCSVRow(Criptomoneda obj) {
 		return obj.getNombre() + "," + obj.getSimbolo() + "," + obj.getValor() + "\n";
 	}
-
 }

@@ -5,7 +5,6 @@ public class App {
 	private static final String FILE_PATH_CRIPTOMONEDAS = "criptomonedas.csv";
 	private static final String FILE_PATH_MERCADO = "mercados.csv";
 	private static final String FILE_PATH_USUARIO = "usuarios.csv";
-	private static final String FILE_PATH_HISTORICO = "historico.csv";
 	
 	public static void main(String[] args) {
 		
@@ -17,9 +16,6 @@ public class App {
 		
 		BuilderUsuario builderUsuario = new BuilderUsuario(csvCriptomoneda, csvMercado);
 		CSVHandler<String, Usuario> csvUsuario = new CSVHandler<String, Usuario>(FILE_PATH_USUARIO, builderUsuario);
-		
-		// BuilderHistorico builderHistorico = new BuilderHistorico();
-		// CSVHandler<String, Historico> csvHistorico = new CSVHandler<String, Historico>(FILE_PATH_HISTORICO, builderHistorico);
 		
 		Inicio inicio = new Inicio(csvUsuario, builderUsuario);
 		

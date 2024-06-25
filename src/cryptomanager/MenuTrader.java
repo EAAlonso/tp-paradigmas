@@ -41,9 +41,11 @@ public class MenuTrader extends Menu {
 			int opcion = this.pedirIngresoOpcion(mostrarOpcionInvalida);
 			
 			switch(opcion) {
-			case OPCION_COMPRAR_CRIPTOMONEDA: // TODO
+			case OPCION_COMPRAR_CRIPTOMONEDA:
+				this.usuario.comprarCriptomonedas();
 				break;
 			case OPCION_VENDER_CRIPTOMONEDA: // TODO 
+				this.usuario.venderCriptomonedas();
 				break;
 			case OPCION_RECOMENDAR_CRIPTOMONEDA: // TODO
 				break;

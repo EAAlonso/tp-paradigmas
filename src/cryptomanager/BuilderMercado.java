@@ -28,5 +28,4 @@ public class BuilderMercado implements BuilderCSVObject<String, Mercado> {
 	public String GetCSVRow(Mercado obj) {
 		return obj.getSimbolo() + "," + obj.getCapacidad() + "," + obj.getVolumen() + "," + obj.getVariacion() + "\n";
 	}
-
 }

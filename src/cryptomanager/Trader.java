@@ -102,6 +102,13 @@ public class Trader extends Usuario {
 		
 		//exhibir la cantidad maxima que podes vender (desde el historico)
 		Historico historico = dataHistorico.obtenerRegistro(criptoBuscada.getSimbolo());
+		
+		if(historico == null) {
+			System.out.println("+ No tienes esa criptomoneda para vender. Presione una tecla para continuar...");
+			Menu.esperarTecla();
+			return;
+		}
+		
 		System.out.println("+ Cantidad maxima para vender: " + historico.getCantidad());
 		
 		double montoAVender = Menu.pedirDouble("+ Ingrese la cantidad que desea vender: ");

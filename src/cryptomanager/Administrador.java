@@ -25,7 +25,14 @@ public class Administrador extends Usuario {
 				return;
 			}
 
-			this.editarCriptomonedaDesdeNombre(nombre);
+			Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
+			nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
+			String simbolo = Menu
+					.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
+			BigDecimal dolarBase = Menu
+					.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
+			
+			this.editarCriptomonedaDesdeNombre(nombre, simbolo, dolarBase);
 
 			return;
 		}
@@ -43,9 +50,15 @@ public class Administrador extends Usuario {
 		if (nombre == null) { // Cancela la operacion
 			return;
 		}
-
-		this.editarCriptomonedaDesdeNombre(nombre);
-
+		
+		Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
+		nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
+		String simbolo = Menu
+				.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
+		BigDecimal dolarBase = Menu
+				.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
+		
+		this.editarCriptomonedaDesdeNombre(nombre, simbolo, dolarBase);
 	}
 	
 	public void eliminarCriptomoneda() {
@@ -76,15 +89,10 @@ public class Administrador extends Usuario {
 		Menu.esperarTecla();
 	}
 	
-	private void editarCriptomonedaDesdeNombre(String nombre) {
+	private void editarCriptomonedaDesdeNombre(String nombre, String simbolo, BigDecimal dolarBase) {
 		Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
 		Mercado itemMercado = this.mercado.obtenerRegistro(criptomonedaEditar.getSimbolo());
 
-		nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
-		String simbolo = Menu
-				.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
-		BigDecimal dolarBase = Menu
-				.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
 
 		this.criptomonedas.actualizarRegistro(criptomonedaEditar.getNombre(),
 				new Criptomoneda(nombre, simbolo, dolarBase));

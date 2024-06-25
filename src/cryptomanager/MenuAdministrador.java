@@ -54,7 +54,6 @@ public class MenuAdministrador extends Menu {
 			case OPCION_SALIR:
 				finPrograma = true;
 				System.out.println("\n+----- Cerrando... -----+");
-				// TODO: Verificar que al salir, en el main se haga el cierre de archivos, pisado de la data del map, etc.
 				break;
 				default:
 			}

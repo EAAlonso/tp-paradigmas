@@ -21,6 +21,10 @@ public class CSVHandler<T,Q> {
 		this.obtenerMapaDesdeArchivo();
 	}
 	
+	public CSVHandler(Map<T,Q> mapa) {
+		this.Data = mapa;
+	}
+	
 	private Map<T,Q> obtenerMapaDesdeArchivo() {
 		String line;
 		Boolean headerLeido = false;
@@ -84,10 +88,6 @@ public class CSVHandler<T,Q> {
 	
 	public Map<T,Q> getContenido() {
 		return this.Data;
-	}
-	
-	public void guardarArchivo() {
-		
 	}
 	
 	public static void crearArchivoCSV(String fileName) {

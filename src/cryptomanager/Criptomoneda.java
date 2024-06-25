@@ -41,6 +41,4 @@ public class Criptomoneda {
 	public String toString() {
 		return String.format("[%s] %s - %.2f", simbolo, nombre, valor);
 	}
-	
-	
 }

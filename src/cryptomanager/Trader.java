@@ -150,12 +150,6 @@ public class Trader extends Usuario {
 		for(String simboloCripto : dataHistorico.getContenido().keySet()) {
 			System.out.println(dataHistorico.obtenerRegistro(simboloCripto));
 		}
-		
-		/*
-		 		for(String simboloCripto : this.mercado.getContenido().keySet()) {
-			System.out.println(this.mercado.obtenerRegistro(simboloCripto));
-		}
-		 */
 	}
 	
 	public void recomendarCriptomoneda() {

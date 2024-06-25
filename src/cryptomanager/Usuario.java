@@ -12,10 +12,6 @@ public abstract class Usuario {
 		this.mercado = dataMercado;
 	}
 	
-	public Usuario() {
-		
-	}
-	
 	public String getNombre() {
 		return this.nombre;
 	}

@@ -2,8 +2,6 @@ package cryptomanager;
 
 
 public class Historico {
-	// BTC , 35 USDT , 5 ... ETH , 23
-	// Simbolo, Cantidad comprada
 	private String simbolo;
 	private double cantidad;
 	

@@ -20,13 +20,8 @@ public class App {
 		CSVHandler<String, Usuario> csvUsuario = new CSVHandler<String, Usuario>(FILE_PATH_USUARIO, builderUsuario);
 		
 		Inicio inicio = new Inicio(csvUsuario, builderUsuario);
-		
 		Usuario usuarioSesion = inicio.iniciarSesion();
-		System.out.println("\n+----- SESION INICIADA -----+\nUsuario: " + usuarioSesion.getNombre());
-		//System.out.println("Usuario iniciado sesion: " + usuarioSesion.getNombre());
-		
 		usuarioSesion.newMenu().iniciar();
-		
 		Inicio.cerrarSesion(usuarioSesion, csvCriptomoneda, csvMercado, csvUsuario);
 		
 		

@@ -43,7 +43,6 @@ public abstract class Menu {
 				System.out.print(mensaje);
 				String input = userInput.nextLine();
 				valor = Integer.parseInt(input);
-				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
@@ -63,7 +62,6 @@ public abstract class Menu {
 				System.out.print(mensaje);
 				valor = userInput.next();
 				userInput.nextLine();
-				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
@@ -83,7 +81,6 @@ public abstract class Menu {
 				System.out.print(mensaje);
 				valor = userInput.nextDouble();
 				userInput.nextLine();
-				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
@@ -103,7 +100,6 @@ public abstract class Menu {
 				System.out.print(mensaje);
 				valor = userInput.nextBigDecimal();
 				userInput.nextLine(); // Limpieza de buffer
-				System.out.println();
 
 				caracterValido = true;
 			} catch (Exception e) {
@@ -142,7 +138,7 @@ public abstract class Menu {
 	}
 
 	private void mensajeOpcionInvalida() {
-		System.out.println("##### Opcion invalida. Intente nuevamente. #####");
+		System.out.println("##### Opcion invalida. Intente nuevamente. #####\n");
 	}
 
 	private void listarOpciones() {

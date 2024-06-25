@@ -60,15 +60,17 @@ public class Trader extends Usuario {
 		if(puedeComprarPorCapacidad(monto, criptoEnMercado)) {
 			// Logica de puede comprar porque hay en mercado
 					
-				// Crea el historico si no existe
-				crearRegistroEnHistorico(criptoBuscada, monto);
-				efectuarCompra(monto, criptoBuscada); // Reduce su saldo
+			// Crea el historico si no existe
+			crearRegistroEnHistorico(criptoBuscada, monto);
+			efectuarCompra(monto, criptoBuscada); // Reduce su saldo
 
-				mercado.actualizarRegistro(criptoEnMercado.getSimbolo(),
-						new Mercado(criptoEnMercado.getSimbolo(),
-								criptoEnMercado.getCapacidad() - monto.doubleValue(),
-								criptoEnMercado.getVolumen(),
-								criptoEnMercado.getVariacion()));
+			mercado.actualizarRegistro(criptoEnMercado.getSimbolo(),
+					new Mercado(criptoEnMercado.getSimbolo(),
+					criptoEnMercado.getCapacidad() - monto.doubleValue(),
+					criptoEnMercado.getVolumen(),
+					criptoEnMercado.getVariacion()));
+			
+			System.out.println("+ Compra exitosa.");
 			
 		} else {
 			// Logica no puede comprar porque no hay suficiente
@@ -105,6 +107,7 @@ public class Trader extends Usuario {
 		double montoAVender = Menu.pedirDouble("+ Ingrese la cantidad que desea vender: ");
 		
 		if(montoAVender > historico.getCantidad()) {
+			System.out.println("\n+ Cantidad insuficiente para vender. Presione una tecla para continuar...");
 			Menu.esperarTecla();
 			return;
 		} 

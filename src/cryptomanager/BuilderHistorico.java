@@ -5,7 +5,7 @@ public class BuilderHistorico implements BuilderCSVObject<String,Historico> {
 	private static final String CSV_HEADER = "simbolo,cantidad\n";
 
 	public BuilderHistorico() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -32,5 +32,4 @@ public class BuilderHistorico implements BuilderCSVObject<String,Historico> {
 	public String GetCSVRow(Historico obj) {
 		return obj.getSimbolo() + "," + obj.getCantidad() + "\n";
 	}
-
 }

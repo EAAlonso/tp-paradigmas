@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+@SuppressWarnings("resource")
 
 public class Inicio {
 	private CSVHandler<String,Usuario> usuarios;

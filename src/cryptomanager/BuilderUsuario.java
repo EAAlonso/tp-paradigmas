@@ -2,10 +2,10 @@ package cryptomanager;
 
 import java.math.BigDecimal;
 
-public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
+public class BuilderUsuario implements BuilderCSVObject<String, Usuario> {
 	private static final String CSV_HEADER = "nombre,perfil_nrocuenta,banco,saldo\n";
 	private static final String ROL_ADMINISTRADOR = "administrador";
-	private static final String PATH_HISTORICO = "%s_historico.csv";
+	private static final String PATH_HISTORICO = "archivos/%s_historico.csv";
 	
 	CSVHandler<String, Criptomoneda> criptomonedas;
 	CSVHandler<String, Mercado> mercado;

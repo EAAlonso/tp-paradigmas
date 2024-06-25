@@ -1,6 +1,6 @@
 package cryptomanager;
 
-public class BuilderHistorico implements BuilderFromStringArray<String,Historico> {
+public class BuilderHistorico implements BuilderCSVObject<String,Historico> {
 
 	private static final String CSV_HEADER = "simbolo,cantidad\n";
 

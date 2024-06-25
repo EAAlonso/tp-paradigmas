@@ -47,7 +47,11 @@ public class Trader extends Usuario {
 		}
 		
 		BigDecimal monto = Menu.pedirBigDecimal("Ingrese cuanto desea comprar (Saldo actual: " + saldoActual + "): ");
-		validarMontoSaldo(monto, criptoBuscada);
+		if(!validarMontoSaldo(monto, criptoBuscada)) {
+			System.out.println("No tenes saldo. Presione una tecla para continuar..."); 
+			Menu.esperarTecla();
+			return;
+		}
 		
 		if(criptoEnMercado == null) {
 			throw new RuntimeException("Error al buscar la criptomoneda en el mercado.");
@@ -82,13 +86,11 @@ public class Trader extends Usuario {
 		boolean criptoValida = false;
 		
 		Criptomoneda criptoBuscada = null;
-		Mercado criptoEnMercado = null;
 
 		while (!criptoValida) {
 
 			if (this.criptomonedas.existe(nombreCripto)) {
 				criptoBuscada = this.criptomonedas.obtenerRegistro(nombreCripto);
-				criptoEnMercado = this.mercado.obtenerRegistro(criptoBuscada.getSimbolo());
 				criptoValida = true;
 			} else {
 				nombreCripto = Menu.pedirString("La criptomoneda que ingresaste no existe! Vuelva a ingresar el nombre:");				
@@ -212,16 +214,8 @@ public class Trader extends Usuario {
 		return monto.doubleValue() < criptoEnMercado.getCapacidad();
 	}
 	
-	private void validarMontoSaldo(BigDecimal monto, Criptomoneda criptomoneda) {
-		boolean montoValido = false;
-		
-		while(!montoValido) {
-			if(monto.multiply(criptomoneda.getValor()).compareTo(saldoActual) < 0) {
-				return;
-			}
-			
-			monto = Menu.pedirBigDecimal("El monto que ingresaste supera tu saldo actual ( " + saldoActual + " ). Vuelva a ingresarlo: ");
-		}
+	private boolean validarMontoSaldo(BigDecimal monto, Criptomoneda criptomoneda) {
+		return monto.multiply(criptomoneda.getValor()).compareTo(saldoActual) <= 0;	
 	}
 
 	@Override

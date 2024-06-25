@@ -2,9 +2,9 @@ package cryptomanager;
 
 public class App {
 
-	private static final String FILE_PATH_CRIPTOMONEDAS = "criptomonedas.csv";
-	private static final String FILE_PATH_MERCADO = "mercados.csv";
-	private static final String FILE_PATH_USUARIO = "usuarios.csv";
+	private static final String FILE_PATH_CRIPTOMONEDAS = "archivos/criptomonedas.csv";
+	private static final String FILE_PATH_MERCADO = "archivos/mercados.csv";
+	private static final String FILE_PATH_USUARIO = "archivos/usuarios.csv";
 	
 	public static void main(String[] args) {
 		

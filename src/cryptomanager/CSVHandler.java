@@ -12,19 +12,20 @@ public class CSVHandler<T,Q> {
 
 	Map<T,Q> Data;
 	String filepath;
-	BuilderFromStringArray<T,Q> constructor;
+	BuilderCSVObject<T,Q> constructor;
 	
-	public CSVHandler(String filepath, BuilderFromStringArray<T,Q> constructor) {
+	public CSVHandler(String filepath, BuilderCSVObject<T,Q> constructor) {
 		this.constructor = constructor;
 		this.Data = new HashMap<T,Q>();
-		this.obtenerMapaDesdeArchivo(filepath);
+		this.filepath = filepath; 
+		this.obtenerMapaDesdeArchivo();
 	}
 	
-	private Map<T,Q> obtenerMapaDesdeArchivo(String filePath) {
+	private Map<T,Q> obtenerMapaDesdeArchivo() {
 		String line;
 		Boolean headerLeido = false;
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(this.filepath))) {
 			while ((line = br.readLine()) != null) {
 				if(!headerLeido) {
 					headerLeido = true;
@@ -91,7 +92,8 @@ public class CSVHandler<T,Q> {
 	
 	public static void crearArchivoCSV(String fileName) {
 		try {
-			new FileWriter(fileName);
+			FileWriter file = new FileWriter(fileName);
+			file.close();
 		} catch(IOException e) {
 			System.err.println("Error al crear el archivo CSV: " + fileName);
 		}	

@@ -1,7 +1,5 @@
 package cryptomanager;
 
-import java.util.Scanner;
-
 public class MenuAdministrador extends Menu {
     static String titulo = "MENU ADMINISTRADOR";
     static String[] opciones =  new String[] {

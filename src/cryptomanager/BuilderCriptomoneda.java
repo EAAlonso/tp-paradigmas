@@ -2,7 +2,7 @@ package cryptomanager;
 
 import java.math.BigDecimal;
 
-public class BuilderCriptomoneda implements BuilderFromStringArray<String, Criptomoneda> {
+public class BuilderCriptomoneda implements BuilderCSVObject<String, Criptomoneda> {
 
 	private static final String CSV_HEADER = "Nombre,simbolo,valor\n";
 

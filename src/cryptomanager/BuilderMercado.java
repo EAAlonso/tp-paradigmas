@@ -1,6 +1,6 @@
 package cryptomanager;
 
-public class BuilderMercado implements BuilderFromStringArray<String, Mercado> {
+public class BuilderMercado implements BuilderCSVObject<String, Mercado> {
 
 	private static final String CSV_HEADER = "simbolo,cantidad,volumen,variacion\n";
 

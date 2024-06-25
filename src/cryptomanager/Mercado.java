@@ -1,7 +1,5 @@
 package cryptomanager;
 
-import java.math.BigDecimal;
-
 public class Mercado {
 	private String simbolo;
 	private double capacidad;

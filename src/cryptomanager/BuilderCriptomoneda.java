@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class BuilderCriptomoneda implements BuilderFromStringArray<String, Criptomoneda> {
 
+	private static final String CSV_HEADER = "Nombre,simbolo,valor\n";
+
 	public BuilderCriptomoneda() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,6 +24,16 @@ public class BuilderCriptomoneda implements BuilderFromStringArray<String, Cript
 	@Override
 	public String GetKey(Criptomoneda obj) {
 		return obj.getNombre();
+	}
+
+	@Override
+	public String GetCSVHeader() {
+		return CSV_HEADER;
+	}
+
+	@Override
+	public String GetCSVRow(Criptomoneda obj) {
+		return obj.getNombre() + "," + obj.getSimbolo() + "," + obj.getValor() + "\n";
 	}
 
 }

@@ -3,6 +3,7 @@ package cryptomanager;
 import java.math.BigDecimal;
 
 public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
+	private static final String CSV_HEADER = "nombre,perfil_nrocuenta,banco,saldo\n";
 	private static final String ROL_ADMINISTRADOR = "administrador";
 	private static final String PATH_HISTORICO = "%s_historico.csv";
 	
@@ -61,6 +62,16 @@ public class BuilderUsuario implements BuilderFromStringArray<String, Usuario> {
 	
 	private void crearArchivoTrader(String nombre) {
 		CSVHandler.crearArchivoCSV(nombre);
+	}
+
+	@Override
+	public String GetCSVHeader() {
+		return CSV_HEADER;
+	}
+
+	@Override
+	public String GetCSVRow(Usuario obj) {
+		return obj.getNombre() + "," + obj.getUserDataCSVRow() + "\n";
 	}
 
 }

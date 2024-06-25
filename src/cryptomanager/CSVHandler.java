@@ -102,5 +102,15 @@ public class CSVHandler<T,Q> {
 		return archivo.exists();		
 	}
 	
-	// TODO private void close() { pisar CSV con el mapa}
+	public void close() {
+		try (FileWriter writer = new FileWriter(this.filepath)) {
+            writer.append(this.constructor.GetCSVHeader());
+
+            for (Q value : this.Data.values()) {
+                writer.append(this.constructor.GetCSVRow(value));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Administrador extends Usuario {
 
+	private static final String PERFIL_ADMINISTRADOR = "administrador";
 	private static final Double CAPACIDAD_DEFAULT_MERCADO = Double.valueOf(500);
 	private static final Double VOLUMEN_DEFAULT_MERCADO = Double.valueOf(1);
 	private static final Double VARIACION_DEFAULT_MERCADO = Double.valueOf(1);
@@ -106,5 +107,13 @@ public class Administrador extends Usuario {
 	@Override
 	public Menu newMenu() {
 		return new MenuAdministrador(this);
+	}
+
+	@Override
+	public void cerrarSesion() {}
+
+	@Override
+	public String getUserDataCSVRow() {
+		return PERFIL_ADMINISTRADOR;
 	}
 }

@@ -240,4 +240,14 @@ public class Trader extends Usuario {
 	public BigDecimal getSaldoActual() {
 		return saldoActual;
 	}
+	
+	@Override
+	public void cerrarSesion() {
+		this.dataHistorico.close();
+	}
+
+	@Override
+	public String getUserDataCSVRow() {
+		return this.nroCuenta + "," + this.nombreBanco + "," + this.saldoActual;
+	}
 }

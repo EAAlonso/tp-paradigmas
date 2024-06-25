@@ -2,6 +2,8 @@ package cryptomanager;
 
 public class BuilderHistorico implements BuilderFromStringArray<String,Historico> {
 
+	private static final String CSV_HEADER = "simbolo,cantidad\n";
+
 	public BuilderHistorico() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,6 +21,16 @@ public class BuilderHistorico implements BuilderFromStringArray<String,Historico
 	@Override
 	public String GetKey(Historico obj) {
 		return obj.getSimbolo();
+	}
+
+	@Override
+	public String GetCSVHeader() {
+		return CSV_HEADER;
+	}
+
+	@Override
+	public String GetCSVRow(Historico obj) {
+		return obj.getSimbolo() + "," + obj.getCantidad() + "\n";
 	}
 
 }

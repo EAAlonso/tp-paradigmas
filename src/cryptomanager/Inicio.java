@@ -125,4 +125,26 @@ public class Inicio {
 		
 		return trader;
 	}
+	
+	public static void cerrarSesion(
+			Usuario usuario, 
+			CSVHandler<String, Criptomoneda> singletonHandlerCriptomoneda,
+			CSVHandler<String, Mercado> singletonHandlerMercado,
+			CSVHandler<String, Usuario> singletonHandlerUsuario) {
+		actualizarUsuarioCSV(usuario, singletonHandlerUsuario); // Actualizo estado del usuario actual
+		usuario.cerrarSesion(); // Actualizo historico del trader
+		singletonHandlerCriptomoneda.close();
+		singletonHandlerMercado.close();
+		singletonHandlerUsuario.close();
+		
+	}
+	
+	private static void actualizarUsuarioCSV(Usuario usuario, CSVHandler<String, Usuario> singletonHandlerUsuario) {
+		if (singletonHandlerUsuario.existe(usuario.getNombre())) {
+			singletonHandlerUsuario.actualizarRegistro(usuario.getNombre(), usuario);
+			return;
+		}
+		
+		singletonHandlerUsuario.insertarRegistro(usuario); // Caso de que se registró en esta sesión
+	}
 }

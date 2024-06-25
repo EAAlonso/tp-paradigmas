@@ -21,6 +21,8 @@ public abstract class Usuario {
 	}
 	
 	public abstract Menu newMenu();
+	public abstract void cerrarSesion();
+	public abstract String getUserDataCSVRow();
 	
 	protected void consultarCriptomoneda() {
 		Menu.limpiarConsola();

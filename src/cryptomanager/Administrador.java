@@ -57,7 +57,7 @@ public class Administrador extends Usuario {
 			return;
 		}
 
-		boolean confirma = Menu.pedirYoN("+ Criptomoneda encontrada. ¿Esta seguro que desea eliminarla?\n+ Y - (Si)\n+ N - (No)\n+ Ingrese una opcion: ");
+		boolean confirma = Menu.pedirYoN("\n+ Criptomoneda encontrada. ¿Esta seguro que desea eliminarla?\n+ Y - (Si)\n+ N - (No)\n+ Ingrese una opcion: ");
 		if (confirma) {
 			this.eliminarCriptomonedaDesdeNombre(nombre);
 		}
@@ -72,7 +72,7 @@ public class Administrador extends Usuario {
 		this.mercado.insertarRegistro(new Mercado(criptomoneda.getSimbolo(), CAPACIDAD_DEFAULT_MERCADO,
 				VOLUMEN_DEFAULT_MERCADO, VARIACION_DEFAULT_MERCADO));
 
-		System.out.println("+ Criptomoneda creada con exito. Presione una tecla para continuar...");
+		System.out.println("\n+ Criptomoneda creada con exito. Presione una tecla para continuar...");
 		Menu.esperarTecla();
 	}
 	
@@ -80,11 +80,11 @@ public class Administrador extends Usuario {
 		Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
 		Mercado itemMercado = this.mercado.obtenerRegistro(criptomonedaEditar.getSimbolo());
 
-		nombre = Menu.pedirString("+ Ingrese el nuevo nombre (Actual: " + nombre + "): ");
+		nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
 		String simbolo = Menu
-				.pedirString("+ Ingrese el nuevo simbolo (Actual: " + criptomonedaEditar.getSimbolo() + "): ");
+				.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
 		BigDecimal dolarBase = Menu
-				.pedirBigDecimal("+ Ingrese el nuevo dolar base (Actual: " + criptomonedaEditar.getValor() + "): ");
+				.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
 
 		this.criptomonedas.actualizarRegistro(criptomonedaEditar.getNombre(),
 				new Criptomoneda(nombre, simbolo, dolarBase));
@@ -100,7 +100,7 @@ public class Administrador extends Usuario {
 		this.mercado.eliminarRegistro(criptomonedaEliminar.getSimbolo());
 		this.criptomonedas.eliminarRegistro(nombre);
 		
-		System.out.println("+ Criptomoneda eliminada. Presione una tecla para continuar...");
+		System.out.println("\n+ Criptomoneda eliminada. Presione una tecla para continuar...");
 		Menu.esperarTecla();
 	}
 
@@ -117,3 +117,4 @@ public class Administrador extends Usuario {
 		return PERFIL_ADMINISTRADOR;
 	}
 }
+

@@ -57,7 +57,6 @@ public class MenuAdministrador extends Menu {
 				// TODO: Verificar que al salir, en el main se haga el cierre de archivos, pisado de la data del map, etc.
 				break;
 				default:
-					System.out.println("+ Opcion invalida.");
 			}
 			
 			mostrarOpcionInvalida = opcion < OPCION_MINIMO || opcion > OPCION_MAXIMO;

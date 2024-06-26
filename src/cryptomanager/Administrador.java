@@ -26,13 +26,13 @@ public class Administrador extends Usuario {
 			}
 
 			Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
-			nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
+			String nuevoNombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
 			String simbolo = Menu
 					.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
 			BigDecimal dolarBase = Menu
 					.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
 			
-			this.editarCriptomonedaDesdeNombre(nombre, simbolo, dolarBase);
+			this.editarCriptomonedaDesdeNombre(nombre, nuevoNombre, simbolo, dolarBase);
 
 			return;
 		}
@@ -52,13 +52,13 @@ public class Administrador extends Usuario {
 		}
 		
 		Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
-		nombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
+		String nuevoNombre = Menu.pedirString("+ Ingrese el nuevo nombre - [Actual: " + nombre + "] --> ");
 		String simbolo = Menu
 				.pedirString("+ Ingrese el nuevo simbolo - [Actual: " + criptomonedaEditar.getSimbolo() + "] --> ");
 		BigDecimal dolarBase = Menu
 				.pedirBigDecimal("+ Ingrese el nuevo dolar base - [Actual: " + criptomonedaEditar.getValor() + "] --> ");
 		
-		this.editarCriptomonedaDesdeNombre(nombre, simbolo, dolarBase);
+		this.editarCriptomonedaDesdeNombre(nombre, nuevoNombre, simbolo, dolarBase);
 	}
 	
 	public void eliminarCriptomoneda() {
@@ -89,13 +89,13 @@ public class Administrador extends Usuario {
 		Menu.esperarTecla();
 	}
 	
-	private void editarCriptomonedaDesdeNombre(String nombre, String simbolo, BigDecimal dolarBase) {
+	public void editarCriptomonedaDesdeNombre(String nombre, String nuevoNombre, String simbolo, BigDecimal dolarBase) {
 		Criptomoneda criptomonedaEditar = this.criptomonedas.obtenerRegistro(nombre);
 		Mercado itemMercado = this.mercado.obtenerRegistro(criptomonedaEditar.getSimbolo());
 
 
 		this.criptomonedas.actualizarRegistro(criptomonedaEditar.getNombre(),
-				new Criptomoneda(nombre, simbolo, dolarBase));
+				new Criptomoneda(nuevoNombre, simbolo, dolarBase));
 		this.mercado.actualizarRegistro(itemMercado.getSimbolo(),
 				new Mercado(simbolo, itemMercado.getCapacidad(), itemMercado.getVolumen(), itemMercado.getVariacion()));
 
@@ -103,7 +103,7 @@ public class Administrador extends Usuario {
 		Menu.esperarTecla();
 	}
 	
-	private void eliminarCriptomonedaDesdeNombre(String nombre) {
+	public void eliminarCriptomonedaDesdeNombre(String nombre) {
 		Criptomoneda criptomonedaEliminar = this.criptomonedas.obtenerRegistro(nombre);
 		this.mercado.eliminarRegistro(criptomonedaEliminar.getSimbolo());
 		this.criptomonedas.eliminarRegistro(nombre);

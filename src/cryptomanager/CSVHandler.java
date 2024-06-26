@@ -21,8 +21,9 @@ public class CSVHandler<T,Q> {
 		this.obtenerMapaDesdeArchivo();
 	}
 	
-	public CSVHandler(Map<T,Q> mapa) {
+	public CSVHandler(Map<T,Q> mapa, BuilderCSVObject<T,Q> constructor) {
 		this.Data = mapa;
+		this.constructor = constructor;
 	}
 	
 	private Map<T,Q> obtenerMapaDesdeArchivo() {
